@@ -1,7 +1,7 @@
 # Table of content
 
-## [ChitChat](story)
-## [Setup] (setup)
+## [ChitChat](#story)
+## [Setup](#setup)
 
 ## Story
 I used to be a loyal bash terminal user, till recently in a seminar I found one awesome guy fiddling with an awesome terminal.
