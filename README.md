@@ -1,0 +1,38 @@
+# Table of content
+
+## [ChitChat](story)
+## [Setup] (setup)
+
+## Story
+I used to be a loyal bash terminal user, till recently in a seminar I found one awesome guy fiddling with an awesome terminal.
+Routine tasks, where I have to remember my project dirs or `alias` them, commands, reverse search were like kids play for him.
+NO ALIASING ??? WTF!!!
+( okay, exaggerated! I know, at-least for folder traversal )
+I felt like a weird toddler, who are old enough to have 4 years of experience in linux.
+For the first time, I feel embarrassed to say I work in linux for my entire career.
+
+And my inner geek totally lost shit and kicked me. "move your ass and ask him..."
+
+That was it, moment of enlightenment.
+
+That's how I start stumble upon `ZSH`. 
+
+(I know you people are probably laughing at me now, Its okay, if you're using ZSH or fish.)
+
+And I found my better half...
+
+## Setup
+
+### [ZSH](https://duckduckgo.com/?q=zsh&t=canonical&ia=web) + [Z](https://github.com/rupa/z/blob/master/z.sh) + [Oh-my-ZSH](https://github.com/robbyrussell/oh-my-zsh) + some awesome plugins
+
+I don't use any plugin manager for zsh as I use minimal set of plugins, and oh-my-zsh backs me up most of the times.
+You can use [antigen](https://github.com/zsh-users/antigen) or [antibody](https://github.com/getantibody/antibody/)
+
+These are the plugins I use
+
+- golang
+- git
+- docker
+- docker-compose
+- docker-machine
+- zsh-history-substring-search
