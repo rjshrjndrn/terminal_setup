@@ -16,6 +16,7 @@ git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM
 
 # over-writtig default zshrc
 sed -i '/^plugins=/a  \
+    z
     zsh-history-substring-search' ~/.zshrc
 echo -e "bindkey '^k' history-substring-search-up \n\
 bindkey '^j' history-substring-search-down
