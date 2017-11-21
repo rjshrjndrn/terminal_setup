@@ -36,3 +36,20 @@ These are the plugins I use
 - docker-compose
 - docker-machine
 - zsh-history-substring-search
+
+So, What does this things do?
+Nice question.
+
+You can type any part of the directorypath and you'll most probably there, based on your recent `cd`
+```z termin <Enter>
+
+i'll be in /home/rajesh/Documents/projects/dev/terminal_setup
+```
+
+and type snippet of a command and press `ctrl+k`
+
+you'll get the latest command history, of that particular command
+```
+ssh <ctrl-k>
+ssh rajesh@10.0.3.2 # some server
+```
