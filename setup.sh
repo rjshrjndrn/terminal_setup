@@ -15,8 +15,10 @@ sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/i
 git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
 
 # over-writtig default zshrc
-sed -i '/^plugins=/a\
+sed -i '/^plugins=/a  \
     zsh-history-substring-search' ~/.zshrc
-
+echo -e "bindkey '^k' history-substring-search-up \n\
+bindkey '^j' history-substring-search-down
+" >> ~/.zshrc
 echo -e "Success.. Please close and restart the terminal\n\
         else please restart your machine"
