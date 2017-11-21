@@ -41,7 +41,8 @@ So, What does this things do?
 Nice question.
 
 You can type any part of the directorypath and you'll most probably there, based on your recent `cd`
-```z termin <Enter>
+```
+z set <Enter>
 
 i'll be in /home/rajesh/Documents/projects/dev/terminal_setup
 ```
