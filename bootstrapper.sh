@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Updating package cache
-apt update
+sudo apt update
 
 # Installing and configuring zsh
-apt install zsh -y
+sudo apt install zsh -y
 
 # Getting oh-my-zsh
 # It's a shitload of plugins, and obiviously it'll make terminal slow
@@ -19,7 +19,7 @@ cp dotfiles/.zshrc ~/
 # run zsh exec
 
 # Installing vim
-apt install vim -y
+sudo apt install vim -y
 
 # Copying Vim configurations
 cp dotfiles/.vimrc ~/
