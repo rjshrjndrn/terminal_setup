@@ -33,3 +33,5 @@ vim -c PluginInstall -c q: -c q:
 
 # Changing shell to zsh
 chsh -s $(which zsh)
+
+echo "please logout your account and login"
