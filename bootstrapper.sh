@@ -12,7 +12,7 @@ apt install zsh -y
 git clone git@github.com:robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 
 # Copying configurations
-cp .zshrc ~/
+cp dotfiles/.zshrc ~/
 
 # if some wiered error happens like _vimfile not found or so
 # Please delete .zbundle* and 
@@ -22,7 +22,7 @@ cp .zshrc ~/
 apt install vim -y
 
 # Copying Vim configurations
-cp .vimrc ~/
+cp dotfiles/.vimrc ~/
 
 # Cloning Vundle 
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
