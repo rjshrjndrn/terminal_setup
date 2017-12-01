@@ -7,7 +7,7 @@ source ~/.oh-my-zsh/lib/history.zsh
 source ~/.oh-my-zsh/lib/theme-and-appearance.zsh
 
 # sourcing all plugins
-source ~/sourcable.sh
+source ~/sourceable.sh
 
 # Aliases
 alias ekaws="cd ~/Documents/projects/ekstep/git/AWS-Setup"

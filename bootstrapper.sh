@@ -10,6 +10,8 @@ sudo apt install zsh -y
 # It's a shitload of plugins, and obiviously it'll make terminal slow
 # So enabling only what I need and not using oh-my-zsh script
 git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/custom/plugins/zsh-completions
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 
 # Copying configurations
 cp dotfiles/.zshrc ~/
