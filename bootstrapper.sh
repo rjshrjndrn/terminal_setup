@@ -29,7 +29,7 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 # Installing all packages
 
-vim -c PluginInstall -c q: -c q:
+vim -c PluginInstall -c :q -c :q
 
 # Changing shell to zsh
 chsh -s $(which zsh)
