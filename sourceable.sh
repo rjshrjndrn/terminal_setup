@@ -9,4 +9,7 @@ source ~/.oh-my-zsh/plugins/docker-machine/docker-machine.plugin.zsh
 source ~/.oh-my-zsh/plugins/golang/golang.plugin.zsh
 source ~/.oh-my-zsh/plugins/history-substring-search/history-substring-search.zsh
 source ~/.oh-my-zsh/custom/plugins/zsh-completions/zsh-completions.plugin.zsh
-source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+
+# This plugin is not compatible zsh older than 1.11 which shipped with ubuntu 14.04
+# From 16.04, it'll be okay
+#source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
