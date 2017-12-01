@@ -15,6 +15,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/p
 
 # Copying configurations
 cp dotfiles/.zshrc ~/
+cp sourceble.sh ~/
 
 # if some wiered error happens like _vimfile not found or so
 # Please delete .zbundle* and 
@@ -34,6 +35,6 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim -c PluginInstall -c :q -c :q
 
 # Changing shell to zsh
-chsh -s $(which zsh)
+sudo chsh -s $(which zsh) $(whoami)
 
 echo "please logout your account and login"
