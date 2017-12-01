@@ -15,7 +15,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/p
 
 # Copying configurations
 cp dotfiles/.zshrc ~/
-cp sourceble.sh ~/
+cp sourceable.sh ~/
 
 # if some wiered error happens like _vimfile not found or so
 # Please delete .zbundle* and 
