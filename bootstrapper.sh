@@ -9,7 +9,7 @@ sudo apt install zsh -y
 # Getting oh-my-zsh
 # It's a shitload of plugins, and obiviously it'll make terminal slow
 # So enabling only what I need and not using oh-my-zsh script
-git clone git@github.com:robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 
 # Copying configurations
 cp dotfiles/.zshrc ~/
