@@ -8,7 +8,8 @@ call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
-"Plugin 'valloric/youcompleteme'
+Plugin 'tpope/vim-surround'
+Plugin 'valloric/youcompleteme'
 Plugin 'vim-scripts/vim-auto-save'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'chase/vim-ansible-yaml'
@@ -35,7 +36,7 @@ filetype plugin indent on    " required
 """""""""""""""""""""""""""""""""""""""""""""""""""
 " Custom changes
 " remapping leader
-:let mapleader = ','
+let mapleader = ','
 
 " Provides tab completion for all file related tasks
 set path+=**
@@ -43,9 +44,26 @@ set path+=**
 " Display all matching while tabbing
 set wildmenu
 set title
+
 "custom tab space
 set tabstop=4 expandtab shiftwidth=4
-:set nu
+set nu
+
+" Setting seach 
+set ic
+set is
+set hls
+
+" Markdown specific highlights
+au BufNewFile,BufFilePre,BufRead *.md,*.txt set spell tabstop=2 expandtab shiftwidth=2
+au BufNewFile,BufFilePre,BufRead *.md,*.txt let auto_save=1
+
+" Yaml specifics
+au BufNewFile,BufFilePre,BufRead *.yml,*.yaml set tabstop=2 expandtab shiftwidth=2 filetype=ansible
+
+"""""""""""""""""""""""""
+" Plugin Configs
+
 "let g:auto_save = 1
 let g:auto_save_noupdatetime = 1
 let g:auto_save_in_insert_mode = 0
@@ -53,7 +71,6 @@ let g:auto_save_in_insert_mode = 0
 " The command to use to format TICKscripts, should not need to be changed
 " let g:tick_fmt_command [default="tickfmt"]
  
-nnoremap <leader>a :set filetype=ansible<Enter>
 " Switch windows
 
 nnoremap <c-j> <c-w>j
@@ -128,3 +145,8 @@ let g:indent_guides_enable_on_vim_startup = 1
 
 "custom file based remapings
 au FileType go nmap <leader>r :!go run %<Enter>
+
+" Markdown web preview
+nnoremap <leader>md :!bash ~/grip.sh start "%" & <enter>
+" Killing grip md server
+nnoremap <leader>mk :!bash ~/grip.sh stop <enter>
