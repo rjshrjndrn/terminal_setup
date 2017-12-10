@@ -22,7 +22,7 @@ cp sourceable.sh ~/
 # run zsh exec
 
 # Installing vim
-sudo apt install vim -y
+sudo apt install vim-gtk -y
 
 # Copying Vim configurations
 cp dotfiles/.vimrc ~/
