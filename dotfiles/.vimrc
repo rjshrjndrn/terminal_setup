@@ -8,8 +8,14 @@ call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
+" Theme
+"
+Plugin 'gosukiwi/vim-atom-dark'
+
+" Plugins
+"
 Plugin 'tpope/vim-surround'
-Plugin 'valloric/youcompleteme'
+"Plugin 'valloric/youcompleteme'
 Plugin 'vim-scripts/vim-auto-save'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'chase/vim-ansible-yaml'
@@ -43,7 +49,7 @@ set path+=**
 
 " Display all matching while tabbing
 set wildmenu
-set title
+" set title
 
 "custom tab space
 set tabstop=4 expandtab shiftwidth=4
@@ -105,7 +111,7 @@ nnoremap <leader>np :set nopaste<Enter>
 
 "airline bar
 let g:airline#extensions#tabline#enabled = 1
-" let g:airline_theme='base16_ashes'
+let g:airline_theme='badcat'
 "YouCompleteMe
 let g:ycm_python_binary_path = '/usr/bin/python3'
 nnoremap <leader>gr :YcmCompleter GetDoc<Enter>
@@ -113,6 +119,7 @@ nnoremap <leader>gd :YcmCompleter GoTo<Enter>
 " vim theme
 " colorscheme industry
 " colorscheme murphy
+colorscheme atom-dark-256
 
 "NERDTreefind
 nnoremap ff :NERDTreeFind <Enter>
