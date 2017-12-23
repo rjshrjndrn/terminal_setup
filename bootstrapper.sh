@@ -13,9 +13,6 @@ git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/custom/plugins/zsh-completions
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 
-# Copying configurations
-cp dotfiles/.zshrc ~/
-
 # if some wiered error happens like _vimfile not found or so
 # Please delete .zbundle* and 
 # run zsh exec
@@ -23,8 +20,8 @@ cp dotfiles/.zshrc ~/
 # Installing vim
 sudo apt install vim-gtk -y
 
-# Copying Vim configurations
-cp dotfiles/.vimrc ~/
+# Copying configurations
+cp dotfiles/* ~/
 
 # Cloning Vundle 
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
