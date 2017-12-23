@@ -23,7 +23,11 @@ And I found my better half...
 
 ## Setup
 
-### [ZSH](https://duckduckgo.com/?q=zsh&t=canonical&ia=web) + [Z](https://github.com/rupa/z/blob/master/z.sh) + [Oh-my-ZSH](https://github.com/robbyrussell/oh-my-zsh) + some awesome plugins
+### Installation
+
+`bash bootstrapper.sh`
+
+[ZSH](https://duckduckgo.com/?q=zsh&t=canonical&ia=web) + [Z](https://github.com/rupa/z/blob/master/z.sh) + [Oh-my-ZSH](https://github.com/robbyrussell/oh-my-zsh) + some awesome plugins
 
 I don't use any plugin manager for zsh as I use minimal set of plugins, and oh-my-zsh backs me up most of the times.
 You can use [antigen](https://github.com/zsh-users/antigen) or [antibody](https://github.com/getantibody/antibody/)
