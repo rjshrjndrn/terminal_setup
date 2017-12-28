@@ -21,7 +21,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/p
 sudo apt install vim-gtk -y
 
 # Copying configurations
-cp dotfiles/* ~/
+cp dotfiles/. ~/
 
 # Cloning Vundle 
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
