@@ -9,13 +9,13 @@ call vundle#begin()
 "call vundle#begin('~/some/path/here')
 
 " Theme
-"
+
 Plugin 'gosukiwi/vim-atom-dark'
 
 " Plugins
-"
+
 Plugin 'tpope/vim-surround'
-"Plugin 'valloric/youcompleteme'
+Plugin 'valloric/youcompleteme'
 Plugin 'vim-scripts/vim-auto-save'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'chase/vim-ansible-yaml'
@@ -29,7 +29,7 @@ Plugin 'nvie/vim-flake8'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-rhubarb'
-Plugin 'yggdroot/indentline'
+" Plugin 'yggdroot/indentline'
 Plugin 'christoomey/vim-tmux-navigator'
 
 " Add all your plugins here (note older versions of Vundle used Bundle instead of Plugin)
@@ -59,6 +59,10 @@ set nu
 set ic
 set is
 set hls
+
+" Copying to system clipboard
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
 
 " Markdown specific highlights
 au BufNewFile,BufFilePre,BufRead *.md,*.txt set spell tabstop=2 expandtab shiftwidth=2
@@ -100,25 +104,25 @@ nnoremap <leader>1q :q!<Enter>
 " Ctrl+a to select all
 nnoremap <C-a> <esc>ggVG<CR>
 
-"for copying to system clipboard
-"you have to install vim-gtk
-nnoremap <leader><leader> :set clipboard=unnamedplus<Enter>
-nnoremap <leader>] :set clipboard=unnamed<Enter>
-nnoremap <leader>p :set paste<Enter>
-nnoremap <leader>np :set nopaste<Enter>
+" To set paste toggle while paste from system clipboard
+set pastetoggle=<F5>
+
+" Folding
+" au BufNewFile,BufRead *.py,*.go set foldmethod=indent 
+nnoremap <space> zA
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 "airline bar
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='badcat'
+
 "YouCompleteMe
 let g:ycm_python_binary_path = '/usr/bin/python3'
-nnoremap <leader>gr :YcmCompleter GetDoc<Enter>
-nnoremap <leader>gd :YcmCompleter GoTo<Enter>
+nnoremap gr :YcmCompleter GetDoc<Enter>
+nnoremap gd :YcmCompleter GoTo<Enter>
+
 " vim theme
-" colorscheme industry
-" colorscheme murphy
 colorscheme atom-dark-256
 
 "NERDTreefind
