@@ -1,5 +1,5 @@
 # theme
-source ~/.oh-my-zsh/themes/amuse.zsh-theme
+source ~/.oh-my-zsh/themes/bira.zsh-theme
 # oh-my-zsh plugins
 source ~/.oh-my-zsh/plugins/docker-machine/docker-machine.plugin.zsh
 source ~/.oh-my-zsh/plugins/docker-compose/_docker-compose
