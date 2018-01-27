@@ -34,8 +34,8 @@ alias gs='git status'
 alias gc='git checkout'
 
 # Exporting vars
-export GOROOT=/home/rajesh/go
-export GOPATH=/home/rajesh/go_code
+export GOROOT=~/go
+export GOPATH=~/go_code
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin:$GOPATH:$GOBIN
 
