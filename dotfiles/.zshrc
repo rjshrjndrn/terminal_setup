@@ -10,20 +10,15 @@ source ~/.oh-my-zsh/lib/theme-and-appearance.zsh
 source ~/.sourceable.sh
 
 # Aliases
-alias ekaws="cd ~/Documents/projects/ekstep/git/AWS-Setup"
-alias ekgit="cd ~/Documents/projects/ekstep/git"
-alias ekmon="cd ~/Documents/projects/ekstep/git/Monitoring-Platform"
 alias sk='find ~/.cred/ekstep -maxdepth 1 -type f -iname "*.pem" -exec ssh-add {} \;'
-alias v='vim'
-alias c='cd'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias cx='chmod +x'
-alias py='function py(){ touch $1;echo -e "#!/usr/bin/env python3\n\n" >> $1; };py'
+alias py='function py(){ touch $1;echo -e "#!/usr/bin/env python3\n" >> $1; };py'
 alias p='python3'
 alias ovp='sudo openvpn --config ~/.cred/openvpn.ovpn'
-alias vv='vim -u ~/.essential.vim'
+alias v='vim -u ~/.essential.vim -N'
 # Tmux alias
 alias ta="tmux attach -t"
 alias tl='tmux ls'
@@ -32,10 +27,16 @@ alias tk='tmux kill-session -t'
 # git aliases
 alias gs='git status'
 alias gc='git checkout'
+alias gp='git pull'
+#shell alias
+alias cl='clear'
+# skiping knowkeys saving
+alias nssh='ssh -o "UserKnownHostsFile /dev/null" -o "StrictHostKeyChecking false"'
+alias nscp='scp -o "UserKnownHostsFile /dev/null" -o "StrictHostKeyChecking false"'
 
 # Exporting vars
-export GOROOT=~/go
-export GOPATH=~/go_code
+export GOROOT=/home/rajesh/go
+export GOPATH=/home/rajesh/go_code
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin:$GOPATH:$GOBIN
 

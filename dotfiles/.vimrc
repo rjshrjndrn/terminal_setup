@@ -1,4 +1,3 @@
-set nocompatible              " required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -14,6 +13,10 @@ Plugin 'gosukiwi/vim-atom-dark'
 
 " Plugins
 
+Plugin 'junegunn/goyo.vim'
+Plugin 'vim-scripts/ingo-library'
+Plugin 'ingo/range.vim'
+Plugin 'vim-scripts/SyntaxRange'
 Plugin 'tpope/vim-surround'
 Plugin 'valloric/youcompleteme'
 Plugin 'vim-scripts/vim-auto-save'
@@ -29,9 +32,8 @@ Plugin 'nvie/vim-flake8'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-rhubarb'
-" Plugin 'yggdroot/indentline'
 Plugin 'christoomey/vim-tmux-navigator'
-
+Plugin 'benmills/vimux'
 " Add all your plugins here (note older versions of Vundle used Bundle instead of Plugin)
 " Add all your plugins here (note older versions of Vundle used Bundle instead of Plugin)
 
@@ -57,6 +59,7 @@ set nu
 
 " Setting seach 
 set ic
+set smartcase
 set is
 set hls
 
@@ -88,12 +91,11 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
-"Switch tabs
-nnoremap tn :tabNext<Enter>
-nnoremap tp :tabprevious<Enter>
-nnoremap tc :tabnew<Enter>
-nnoremap bn :bn<Enter>
-nnoremap bp :bp<Enter>
+"Switch buffers
+nnoremap ]b :bn<Enter>
+nnoremap [b :bp<Enter>
+nnoremap [B :blast<Enter>
+nnoremap ]B :bfirst<Enter>
 
 " Quit
 nnoremap <leader>w :w<Enter>
@@ -114,7 +116,7 @@ nnoremap <space> zA
 
 
 "airline bar
-let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='badcat'
 
 "YouCompleteMe
