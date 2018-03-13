@@ -1,14 +1,13 @@
 # loading all stock functions
 autoload -U compaudit compinit
-
+# sourcing necessary libs from oh-my-zsh
 source ~/.oh-my-zsh/lib/completion.zsh
-source ~/.oh-my-zsh/lib/history.zsh
 source ~/.oh-my-zsh/lib/git.zsh
+source ~/.oh-my-zsh/lib/history.zsh
 source ~/.oh-my-zsh/lib/theme-and-appearance.zsh
-source ~/.oh-my-zsh/themes/bira.zsh-theme
-source ~/.oh-my-zsh/plugins/history-substring-search/history-substring-search.zsh
-source ~/.oh-my-zsh/plugins/z/z.plugin.zsh
-source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+
+# sourcing all plugins
+source ~/.sourceable.sh
 
 # Aliases
 alias sk='find ~/.cred/ekstep -maxdepth 1 -type f -iname "*.pem" -exec ssh-add {} \;'
@@ -31,7 +30,6 @@ alias gc='git checkout'
 alias gp='git pull'
 #shell alias
 alias cl='clear'
-alias ssh='ssh -A'
 # skiping knowkeys saving
 alias nssh='ssh -o "UserKnownHostsFile /dev/null" -o "StrictHostKeyChecking false"'
 alias nscp='scp -o "UserKnownHostsFile /dev/null" -o "StrictHostKeyChecking false"'
@@ -48,5 +46,6 @@ bindkey '^j' history-substring-search-down
 
 # Auto accept suggestion
 bindkey '^n' autosuggest-accept
+
 # swapping caps and escape
 if [ $(xmodmap -pk | grep Caps | awk '{ print $1 }') -ne 9 ];then xmodmap ~/.Xmodmap; fi
