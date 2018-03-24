@@ -33,4 +33,5 @@ vim -c PluginInstall -c :q -c :q
 # Changing shell to zsh
 sudo chsh -s $(which zsh) $(whoami)
 
+# finising
 echo "please logout your account and login"
