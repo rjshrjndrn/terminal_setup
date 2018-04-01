@@ -15,6 +15,8 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'vim-airline/vim-airline'
 Plugin 'tpope/vim-rhubarb'
 Plugin 'scrooloose/nerdtree'
+Plugin 'wincent/ferret'
+Plugin 'chase/vim-ansible-yaml'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -75,6 +77,8 @@ set wildmenu
 set path+=**
 
 nnoremap <leader>q :q<CR>
+nnoremap <leader>wq :wq<CR>
+nnoremap <leader>1q :q!<CR>
 
 " Smartcasing search
 set ic
@@ -84,3 +88,11 @@ set smartcase
 nnoremap ff :NERDTreeFind <Enter>
 "NERDTree toggle
 nnoremap <C-n> :NERDTreeToggle<CR>
+
+" Ansible
+au BufNewFile,BufFilePre,BufRead *.yml,*.yaml set tabstop=2 expandtab shiftwidth=2 filetype=ansible
+
+"fugitive vim
+nnoremap gw :Gwrite<Enter>
+nnoremap gs :Gstatus<Enter>
+nnoremap gc :Gcommit<Enter>

@@ -5,7 +5,7 @@ source ~/.oh-my-zsh/lib/completion.zsh
 source ~/.oh-my-zsh/lib/history.zsh
 source ~/.oh-my-zsh/lib/git.zsh
 source ~/.oh-my-zsh/lib/theme-and-appearance.zsh
-source ~/.oh-my-zsh/themes/bira.zsh-theme
+source ~/.oh-my-zsh/themes/eastwood.zsh-theme
 source ~/.oh-my-zsh/plugins/history-substring-search/history-substring-search.zsh
 source ~/.oh-my-zsh/plugins/z/z.plugin.zsh
 source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
@@ -20,6 +20,7 @@ alias py='function py(){ touch $1;echo -e "#!/usr/bin/env python3\n" >> $1; };py
 alias p='python3'
 alias ovp='sudo openvpn --config ~/.cred/openvpn.ovpn'
 alias v='vim -u ~/.essential.vim -N'
+alias nv='nvim'
 # Tmux alias
 alias ta="tmux attach -t"
 alias tl='tmux ls'

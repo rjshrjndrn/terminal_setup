@@ -45,6 +45,10 @@ filetype plugin indent on    " required
 " Custom changes
 " remapping leader
 let mapleader = ','
+set bs=eol,start,indent
+
+" ignoring changes while changing buffers
+set hidden
 
 " Provides tab completion for all file related tasks
 set path+=**
