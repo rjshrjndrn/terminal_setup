@@ -1,6 +1,7 @@
 # loading all stock functions
 autoload -U compaudit compinit
 
+source ~/.oh-my-zsh/plugins/vi-mode/vi-mode.plugin.zsh
 source ~/.oh-my-zsh/lib/completion.zsh
 source ~/.oh-my-zsh/lib/history.zsh
 source ~/.oh-my-zsh/lib/git.zsh
