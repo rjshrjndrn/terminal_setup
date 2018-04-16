@@ -28,6 +28,7 @@ alias tl='tmux ls'
 alias tc='tmux new -s'
 alias tk='tmux kill-session -t'
 # git aliases
+alias g='git'
 alias gs='git status'
 alias gc='git checkout'
 alias gpl='git pull'

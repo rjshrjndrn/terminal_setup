@@ -13,10 +13,6 @@ Plugin 'gosukiwi/vim-atom-dark'
 
 " Plugins
 
-Plugin 'junegunn/goyo.vim'
-Plugin 'vim-scripts/ingo-library'
-Plugin 'ingo/range.vim'
-Plugin 'vim-scripts/SyntaxRange'
 Plugin 'tpope/vim-surround'
 Plugin 'valloric/youcompleteme'
 Plugin 'vim-scripts/vim-auto-save'
@@ -94,6 +90,12 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
+
+"Switch buffers
+nnoremap ]t :tabn<Enter>
+nnoremap [t :tabp<Enter>
+nnoremap [T :tablast<Enter>
+nnoremap ]T :tabfirst<Enter>
 
 "Switch buffers
 nnoremap ]b :bn<Enter>
