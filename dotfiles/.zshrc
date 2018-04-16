@@ -30,7 +30,8 @@ alias tk='tmux kill-session -t'
 # git aliases
 alias gs='git status'
 alias gc='git checkout'
-alias gp='git pull'
+alias gpl='git pull'
+alias gp='git push'
 #shell alias
 alias cl='clear'
 alias ssh='ssh -A'
