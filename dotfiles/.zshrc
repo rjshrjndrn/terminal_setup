@@ -29,6 +29,7 @@ alias tc='tmux new -s'
 alias tk='tmux kill-session -t'
 # git aliases
 alias g='git'
+alias ga='git add'
 alias gs='git status'
 alias gc='git checkout'
 alias gpl='git pull'
@@ -39,6 +40,9 @@ alias ssh='ssh -A'
 # skiping knowkeys saving
 alias nssh='ssh -o "UserKnownHostsFile /dev/null" -o "StrictHostKeyChecking false"'
 alias nscp='scp -o "UserKnownHostsFile /dev/null" -o "StrictHostKeyChecking false"'
+# ansible aliases
+alias ap='ansible-playbook'
+alias apc='ansible-playbook -c local'
 
 # Exporting vars
 export GOROOT=/home/rajesh/go
