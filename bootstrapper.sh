@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Updating package cache
-sudo apt update
+#sudo apt update
 
 # Installing and configuring zsh
-sudo apt install zsh -y
+#sudo apt install zsh -y
 
 # Getting oh-my-zsh
 # It's a shitload of plugins, and obiviously it'll make terminal slow
@@ -18,7 +18,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/p
 # run zsh exec
 
 # Installing vim
-sudo apt install vim-gtk -y
+#sudo apt install vim-gtk -y
 
 # Copying configurations
 find $(pwd)/dotfiles -type f -exec ln -sf {} ~/ \;
@@ -30,8 +30,12 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 vim -c PluginInstall -c :q -c :q
 
+# Copying caps esc swap script to /usr/local/bin
+cp ./services/capsswap /usr/local/bin/
+cp ./services/capsswap.service /etc/systemd/system/
 # Changing shell to zsh
-sudo chsh -s $(which zsh) $(whoami)
+#sudo chsh -s $(which zsh) $(whoami)
 
 # finising
-echo "please logout your account and login"
+#echo "please logout your account and login"
+

@@ -1,0 +1,10 @@
+[Unit]
+After=display-manager.service
+Type=oneshot
+Description=Swapping Esc and Capslock
+
+[Service]
+ExecStart=/usr/local/bin/capsswap
+
+[Install]
+WantedBy=multi-user.target 

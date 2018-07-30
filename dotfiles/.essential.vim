@@ -1,98 +1,74 @@
-set nocompatible              " be iMproved, required
+" Plugins
+" ----------------- {{{
+set nocompatible
+set encoding=utf-8
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
+" Plugins
+
+Plugin 'gmarik/Vundle.vim'
+Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-fugitive'
-Plugin 'vim-airline/vim-airline'
-Plugin 'tpope/vim-rhubarb'
-Plugin 'scrooloose/nerdtree'
-Plugin 'wincent/ferret'
 Plugin 'chase/vim-ansible-yaml'
-
-" All of your Plugins must be added before the following line
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'wincent/ferret'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rhubarb'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'gosukiwi/vim-atom-dark'
 call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-filetype plugin indent on    " required
-colorscheme murphy
+" ----------------- }}}
 
 syn on
-set nu
+filetype plugin indent on
+let mapleader = ","
+colorscheme atom-dark-256
+syn on
 
-" Remapping leader
-let mapleader=","
+set hidden nu is scs
 
-" Keeping softtabs
-set tabstop=4 expandtab shiftwidth=4
-
-" Setting backspace as normal
-set backspace=indent,eol,start
-
-" Navigating buffers
-nnoremap [b :bprevious<CR>
-nnoremap ]b :bnext<CR>
-nnoremap [B :bfirst<CR>
-nnoremap ]B :blast<CR>
-
-" Switch windows
-
+" Remappings
+" ----------------- {{{
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
-nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
+nnoremap <c-h> <c-w>h
+nnoremap <leader>w :w<cr>
+nnoremap <leader>q :q<cr>
+" ----------------- }}}
 
-" Set paste mode
-set pastetoggle=<f5>
+" Autocmd commands
+"-----------------------------    {{{
+" vim
+augroup filetye_vim
+	autocmd!
+	autocmd Filetype vim setlocal foldmethod=marker shiftwidth=4 tabstop=4 | nnoremap <space> zA
+augroup END
+" shell
+augroup filetye_script
+	autocmd!
+	autocmd Filetype sh setlocal foldmethod=indent shiftwidth=4 tabstop=4 | nnoremap <space> zA
+augroup END
+"}}}
 
-" Now when we type %% on Vim’s : command-line prompt, it automatically expands to
-" the path of the active buffer, just as though we had typed %:h <Tab>
-cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
-
-" suppress error on buf change while its modified
-set hidden
-
-" Set wildmenu
-set wildmenu
-
-" set path to search for all subdirectories
-set path+=**
-
-nnoremap <leader>q :q<CR>
-nnoremap <leader>wq :wq<CR>
-nnoremap <leader>1q :q!<CR>
-
-" Smartcasing search
-set ic
-set smartcase
-
-"NERDTreefind
-nnoremap ff :NERDTreeFind <Enter>
-"NERDTree toggle
-nnoremap <C-n> :NERDTreeToggle<CR>
-
-" Ansible
-au BufNewFile,BufFilePre,BufRead *.yml,*.yaml set tabstop=2 expandtab shiftwidth=2 filetype=ansible
-
-"fugitive vim
-nnoremap gw :Gwrite<Enter>
-nnoremap gs :Gstatus<Enter>
-nnoremap gc :Gcommit<Enter>
+" Funtions
+"-----------------------------    {{{
+function! Hls()
+	if &hlsearch
+		let &l:hlsearch=0
+	else
+		let &l:hlsearch=1
+	endif
+endfunction
+function! Git()
+	!git rev-parse --abbrev-ref HEAD
+endfunction
+"}}}

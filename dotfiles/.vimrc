@@ -1,3 +1,6 @@
+set encoding=utf-8
+
+" Plugins {{{
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -14,6 +17,7 @@ Plugin 'gosukiwi/vim-atom-dark'
 " Plugins
 
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
 Plugin 'valloric/youcompleteme'
 Plugin 'vim-scripts/vim-auto-save'
 Plugin 'gmarik/Vundle.vim'
@@ -29,15 +33,17 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-rhubarb'
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'benmills/vimux'
+Plugin 'yuttie/comfortable-motion.vim'
 " Add all your plugins here (note older versions of Vundle used Bundle instead of Plugin)
 " Add all your plugins here (note older versions of Vundle used Bundle instead of Plugin)
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
-filetype plugin indent on    " required
+" }}}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""
+filetype plugin indent on    " required
+syn on
+
 " Custom changes
 " remapping leader
 let mapleader = ','
@@ -57,23 +63,6 @@ set wildmenu
 set tabstop=4 expandtab shiftwidth=4
 set nu
 
-" Setting seach 
-set ic
-set smartcase
-set is
-set hls
-
-" Copying to system clipboard
-nnoremap <leader>y "+y
-vnoremap <leader>y "+y
-
-" Markdown specific highlights
-au BufNewFile,BufFilePre,BufRead *.md,*.txt set spell tabstop=2 expandtab shiftwidth=2
-au BufNewFile,BufFilePre,BufRead *.md,*.txt let auto_save=1
-
-" Yaml specifics
-au BufNewFile,BufFilePre,BufRead *.yml,*.yaml set tabstop=2 expandtab shiftwidth=2 filetype=ansible
-
 """""""""""""""""""""""""
 " Plugin Configs
 
@@ -81,9 +70,7 @@ au BufNewFile,BufFilePre,BufRead *.yml,*.yaml set tabstop=2 expandtab shiftwidth
 let g:auto_save_noupdatetime = 1
 let g:auto_save_in_insert_mode = 0
 
-" The command to use to format TICKscripts, should not need to be changed
-" let g:tick_fmt_command [default="tickfmt"]
- 
+" keyboad mappings {{{
 " Switch windows
 
 nnoremap <c-j> <c-w>j
@@ -117,26 +104,74 @@ set pastetoggle=<F5>
 
 " Folding
 " au BufNewFile,BufRead *.py,*.go set foldmethod=indent 
-nnoremap <space> zA
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <space> za
+nnoremap <S-space> zA
 
-
-"airline bar
-" let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='badcat'
+"fugitive vim
+nnoremap gw :Gwrite<Enter>
+nnoremap gs :Gstatus<Enter>
+nnoremap gc :Gcommit<Enter>
+nnoremap gp :Gpush
+nnoremap gpl :Gpull
+nnoremap gca :Gcommit --amend
+nnoremap gpl :Gpull --rebase<CR>
 
 "YouCompleteMe
 let g:ycm_python_binary_path = '/usr/bin/python3'
 nnoremap gr :YcmCompleter GetDoc<Enter>
 nnoremap gd :YcmCompleter GoTo<Enter>
 
-" vim theme
-colorscheme atom-dark-256
-
 "NERDTreefind
 nnoremap ff :NERDTreeFind <Enter>
 "NERDTree toggle
 nnoremap <C-n> :NERDTreeToggle<CR>
+
+" Markdown web preview
+nnoremap <leader>md :!bash ~/grip.sh start "%" & <enter>
+" Killing grip md server
+nnoremap <leader>mk :!bash ~/grip.sh stop <enter>
+
+" Write files without permission
+nnoremap sw :w !sudo tee % > /dev/null
+
+" toggle hls
+nnoremap <leader>h :set hls!<CR>
+
+" Copying to system clipboard
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+
+"}}}
+
+" Autocmd Commands {{{
+" Vim
+augroup filetype_vim 
+    autocmd!
+    autocmd Filetype vim,python,sh setlocal foldmethod=marker shiftwidth=4 tabstop =4 
+augroup END
+
+" Markdown specific highlights
+augroup filetype_md
+    autocmd!
+    autocmd Filetype markdown,text setlocal spell tabstop=2 expandtab shiftwidth=2 | let auto_save=1
+augroup END
+
+" Ansible
+augroup filetype_md
+    autocmd!
+    au Filetype *.yml,*.yaml set tabstop=2 expandtab shiftwidth=2 filetype=ansible foldmethod=indent fml=10
+augroup END
+
+"}}}
+
+"airline bar
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='badcat'
+
+
+" vim theme
+colorscheme atom-dark-256
+
 
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
@@ -153,19 +188,9 @@ let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
-"fugitive vim
-nnoremap gw :Gwrite<Enter>
-nnoremap gs :Gstatus<Enter>
-nnoremap gc :Gcommit<Enter>
-
 " Intent
 let g:indent_guides_enable_on_vim_startup = 1
-
 
 "custom file based remapings
 au FileType go nmap <leader>r :!go run %<Enter>
 
-" Markdown web preview
-nnoremap <leader>md :!bash ~/grip.sh start "%" & <enter>
-" Killing grip md server
-nnoremap <leader>mk :!bash ~/grip.sh stop <enter>

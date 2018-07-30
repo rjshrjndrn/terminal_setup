@@ -1,1 +1,1 @@
-xmodmap ~/.Xmodmap
+setxkbmap -option caps:escape
