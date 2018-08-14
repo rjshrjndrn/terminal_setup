@@ -12,13 +12,15 @@ call vundle#begin()
 
 " Theme
 
+Plugin 'nightsense/snow'
 Plugin 'gosukiwi/vim-atom-dark'
 
 " Plugins
-
+Plugin 'cloudhead/neovim-fuzzy'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'valloric/youcompleteme'
+Plugin 'vheon/JediHTTP'
 Plugin 'vim-scripts/vim-auto-save'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'chase/vim-ansible-yaml'
@@ -42,12 +44,14 @@ call vundle#end()            " required
 " }}}
 
 filetype plugin indent on    " required
-syn on
+syn on NoMatchParen
 
 " Custom changes
 " remapping leader
 let mapleader = ','
 set bs=eol,start,indent
+set ic is scs
+set autochdir
 
 " ignoring changes while changing buffers
 set hidden
@@ -70,7 +74,16 @@ set nu
 let g:auto_save_noupdatetime = 1
 let g:auto_save_in_insert_mode = 0
 
+" Functions
+function! Term()
+  exec winheight(0)/4."split" | terminal
+endfunction
+
+
 " keyboad mappings {{{
+" visual select
+vnoremap // "zy/<C-R>z<CR>
+
 " Switch windows
 
 nnoremap <c-j> <c-w>j
@@ -79,14 +92,12 @@ nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
 "Switch buffers
-nnoremap ]t :tabn<Enter>
-nnoremap [t :tabp<Enter>
 nnoremap [T :tablast<Enter>
 nnoremap ]T :tabfirst<Enter>
 
 "Switch buffers
-nnoremap ]b :bn<Enter>
-nnoremap [b :bp<Enter>
+nnoremap gb :bn<Enter>
+nnoremap gB :bp<Enter>
 nnoremap [B :blast<Enter>
 nnoremap ]B :bfirst<Enter>
 
@@ -118,13 +129,16 @@ nnoremap gpl :Gpull --rebase<CR>
 
 "YouCompleteMe
 let g:ycm_python_binary_path = '/usr/bin/python3'
+let g:ycm_seed_identifiers_with_syntax = 1
 nnoremap gr :YcmCompleter GetDoc<Enter>
 nnoremap gd :YcmCompleter GoTo<Enter>
+let g:ycm_key_invoke_completion = '<c-x>'
+let g:ycm_autoclose_preview_window_after_completion=1
 
 "NERDTreefind
-nnoremap ff :NERDTreeFind <Enter>
+nnoremap <silent> ff :NERDTreeFind <Enter>
 "NERDTree toggle
-nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <silent> <C-n> :NERDTreeToggle<CR>
 
 " Markdown web preview
 nnoremap <leader>md :!bash ~/grip.sh start "%" & <enter>
@@ -135,11 +149,29 @@ nnoremap <leader>mk :!bash ~/grip.sh stop <enter>
 nnoremap sw :w !sudo tee % > /dev/null
 
 " toggle hls
-nnoremap <leader>h :set hls!<CR>
+nnoremap <silent> <leader>h :set hls!<CR>
 
 " Copying to system clipboard
-nnoremap <leader>y "+y
-vnoremap <leader>y "+y
+noremap <leader>y "+y
+nnoremap <C-p> :FuzzyOpen<cr>
+
+if has('nvim')
+     tnoremap <C-h> <C-\><C-N><C-w>h
+     tnoremap <C-j> <C-\><C-N><C-w>j
+     tnoremap <C-k> <C-\><C-N><C-w>k
+     tnoremap <C-l> <C-\><C-N><C-w>l
+     inoremap <C-h> <C-\><C-N><C-w>h
+     inoremap <C-j> <C-\><C-N><C-w>j
+     inoremap <C-k> <C-\><C-N><C-w>k
+     inoremap <C-l> <C-\><C-N><C-w>l
+     noremap <A-c> "+y
+     noremap <A-v> "+p
+     nnoremap <expr> <leader>t ":call Term()\<CR>"
+"      nnoremap <A-h> <C-w>h
+"      nnoremap <A-j> <C-w>j
+"      nnoremap <A-k> <C-w>k
+"      nnoremap <A-l> <C-w>l
+endif
 
 "}}}
 
@@ -162,6 +194,11 @@ augroup filetype_md
     au Filetype *.yml,*.yaml set tabstop=2 expandtab shiftwidth=2 filetype=ansible foldmethod=indent fml=10
 augroup END
 
+" start terminal in insert mode
+if has('nvim')
+    autocmd TermOpen,BufEnter term://* startinsert
+endif
+
 "}}}
 
 "airline bar
@@ -170,7 +207,8 @@ let g:airline_theme='badcat'
 
 
 " vim theme
-colorscheme atom-dark-256
+colorscheme snow | set background=dark
+" colorscheme atom-dark-256
 
 
 " Add spaces after comment delimiters by default
