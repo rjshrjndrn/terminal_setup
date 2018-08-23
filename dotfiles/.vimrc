@@ -10,12 +10,9 @@ call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
-" Theme
-
-Plugin 'nightsense/snow'
-Plugin 'gosukiwi/vim-atom-dark'
 
 " Plugins
+Plugin 'tpope/vim-unimpaired'
 Plugin 'cloudhead/neovim-fuzzy'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
@@ -36,6 +33,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-rhubarb'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'yuttie/comfortable-motion.vim'
+Plugin 'easymotion/vim-easymotion'
 " Add all your plugins here (note older versions of Vundle used Bundle instead of Plugin)
 " Add all your plugins here (note older versions of Vundle used Bundle instead of Plugin)
 
@@ -51,7 +49,6 @@ syn on NoMatchParen
 let mapleader = ','
 set bs=eol,start,indent
 set ic is scs
-set autochdir
 
 " ignoring changes while changing buffers
 set hidden
@@ -118,6 +115,7 @@ set pastetoggle=<F5>
 nnoremap <space> za
 nnoremap <S-space> zA
 
+
 "fugitive vim
 nnoremap gw :Gwrite<Enter>
 nnoremap gs :Gstatus<Enter>
@@ -126,12 +124,11 @@ nnoremap gp :Gpush
 nnoremap gpl :Gpull
 nnoremap gca :Gcommit --amend
 nnoremap gpl :Gpull --rebase<CR>
-
+nnoremap <silent> gd :Gdiff HEAD~1<CR>
 "YouCompleteMe
 let g:ycm_python_binary_path = '/usr/bin/python3'
 let g:ycm_seed_identifiers_with_syntax = 1
 nnoremap gr :YcmCompleter GetDoc<Enter>
-nnoremap gd :YcmCompleter GoTo<Enter>
 let g:ycm_key_invoke_completion = '<c-x>'
 let g:ycm_autoclose_preview_window_after_completion=1
 
@@ -191,7 +188,7 @@ augroup END
 " Ansible
 augroup filetype_md
     autocmd!
-    au Filetype *.yml,*.yaml set tabstop=2 expandtab shiftwidth=2 filetype=ansible foldmethod=indent fml=10
+    au Filetype yaml set tabstop=2 expandtab shiftwidth=2 filetype=ansible foldmethod=indent fml=10
 augroup END
 
 " start terminal in insert mode
@@ -207,9 +204,13 @@ let g:airline_theme='badcat'
 
 
 " vim theme
-colorscheme snow | set background=dark
-" colorscheme atom-dark-256
-
+colorscheme industry
+" Customizing cursor to be less obstusive
+set cursorline guicursor=n:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+" This line should be after the colourscheme
+highlight clear LineNr
+highlight clear cursorline
+highlight CursorLineNr cterm=bold ctermfg=white
 
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
