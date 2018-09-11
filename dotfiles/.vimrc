@@ -41,8 +41,7 @@ Plugin 'easymotion/vim-easymotion'
 call vundle#end()            " required
 " }}}
 
-filetype plugin indent on    " required
-syn on NoMatchParen
+filetype plugin indent on    " required syn on NoMatchParen
 
 " Custom changes
 " remapping leader
@@ -57,8 +56,7 @@ set hidden
 set path+=**
 
 " Display all matching while tabbing
-set wildmenu
-" set title
+set wildmenu title diffopt+=vertical
 
 "custom tab space
 set tabstop=4 expandtab shiftwidth=4
@@ -124,7 +122,7 @@ nnoremap gp :Gpush
 nnoremap gpl :Gpull
 nnoremap gca :Gcommit --amend
 nnoremap gpl :Gpull --rebase<CR>
-nnoremap <silent> gd :Gdiff HEAD~1<CR>
+nnoremap <silent> gd :Gvdiff HEAD~1<CR>
 "YouCompleteMe
 let g:ycm_python_binary_path = '/usr/bin/python3'
 let g:ycm_seed_identifiers_with_syntax = 1
@@ -204,13 +202,14 @@ let g:airline_theme='badcat'
 
 
 " vim theme
-colorscheme industry
+" colorscheme industry
 " Customizing cursor to be less obstusive
-set cursorline guicursor=n:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+" set cursorline guicursor=n:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
 " This line should be after the colourscheme
 highlight clear LineNr
+set cursorline
 highlight clear cursorline
-highlight CursorLineNr cterm=bold ctermfg=white
+highlight CursorLineNr cterm=bold ctermfg=black
 
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
