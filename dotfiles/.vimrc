@@ -11,13 +11,15 @@ call vundle#begin()
 "call vundle#begin('~/some/path/here')
 
 
+" Theme
+Plugin 'lifepillar/vim-solarized8'
 " Plugins
 Plugin 'tpope/vim-unimpaired'
-Plugin 'cloudhead/neovim-fuzzy'
+Plugin 'junegunn/fzf'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-obsession'
 Plugin 'valloric/youcompleteme'
-Plugin 'vheon/JediHTTP'
 Plugin 'vim-scripts/vim-auto-save'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'chase/vim-ansible-yaml'
@@ -26,13 +28,11 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'wincent/ferret'
 Plugin 'fatih/vim-go'
 Plugin 'tpope/vim-fugitive'
-Plugin 'nathanielc/vim-tickscript'
 Plugin 'nvie/vim-flake8'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-rhubarb'
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'yuttie/comfortable-motion.vim'
 Plugin 'easymotion/vim-easymotion'
 " Add all your plugins here (note older versions of Vundle used Bundle instead of Plugin)
 " Add all your plugins here (note older versions of Vundle used Bundle instead of Plugin)
@@ -52,16 +52,27 @@ set ic is scs
 " ignoring changes while changing buffers
 set hidden
 
-" Provides tab completion for all file related tasks
-set path+=**
-
 " Display all matching while tabbing
 set wildmenu title diffopt+=vertical
+
+" including childirs
+" Especially for ansible roles
+set path+=**
 
 "custom tab space
 set tabstop=4 expandtab shiftwidth=4
 set nu
 
+" Custom Undo
+set undofile
+if !has('nvim')
+    set undodir=~/.vim/undo
+endif
+
+augroup vimrc
+    autocmd!
+    autocmd BufWritePre /tmp/* setlocal noundofile
+augroup END
 """""""""""""""""""""""""
 " Plugin Configs
 
@@ -74,7 +85,12 @@ function! Term()
   exec winheight(0)/4."split" | terminal
 endfunction
 
+function! BufOnly()
+    :%bd | e#
+endfunction
 
+" Commands
+command! BufOnly call BufOnly()
 " keyboad mappings {{{
 " visual select
 vnoremap // "zy/<C-R>z<CR>
@@ -85,16 +101,15 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
-
-"Switch buffers
-nnoremap [T :tablast<Enter>
-nnoremap ]T :tabfirst<Enter>
-
-"Switch buffers
-nnoremap gb :bn<Enter>
-nnoremap gB :bp<Enter>
-nnoremap [B :blast<Enter>
-nnoremap ]B :bfirst<Enter>
+if has('nvim')
+    " Escape mode
+    tnoremap <C-b><C-b> <C-\><C-n>
+    " shell jumping
+    tnoremap <c-h> <c-\><c-n><c-w>h
+    tnoremap <c-j> <c-\><c-n><c-w>j
+    tnoremap <c-k> <c-\><c-n><c-w>k
+    tnoremap <c-l> <c-\><c-n><c-w>l
+endif
 
 " Quit
 nnoremap <leader>w :w<Enter>
@@ -104,9 +119,6 @@ nnoremap <leader>1q :q!<Enter>
 
 " Ctrl+a to select all
 nnoremap <C-a> <esc>ggVG<CR>
-
-" To set paste toggle while paste from system clipboard
-set pastetoggle=<F5>
 
 " Folding
 " au BufNewFile,BufRead *.py,*.go set foldmethod=indent 
@@ -122,7 +134,11 @@ nnoremap gp :Gpush
 nnoremap gpl :Gpull
 nnoremap gca :Gcommit --amend
 nnoremap gpl :Gpull --rebase<CR>
-" nnoremap <silent> gd :Gvdiff HEAD~1<CR>
+autocmd BufReadPost fugitive://* set bufhidden=delete
+" Commenting for fugitive commit session
+" will take branch name as #Issue-number
+let @e='5G$vByggIIssue #0000 feat: pggA'
+
 "YouCompleteMe
 let g:ycm_python_binary_path = '/usr/bin/python3'
 let g:ycm_seed_identifiers_with_syntax = 1
@@ -147,25 +163,11 @@ nnoremap sw :w !sudo tee % > /dev/null
 nnoremap <silent> <leader>h :set hls!<CR>
 
 " Copying to system clipboard
-noremap <leader>y "+y
-nnoremap <C-p> :FuzzyOpen<cr>
+vnoremap Y "+y
+nnoremap <C-p> :<C-u>FZF<cr>
 
 if has('nvim')
-     tnoremap <C-h> <C-\><C-N><C-w>h
-     tnoremap <C-j> <C-\><C-N><C-w>j
-     tnoremap <C-k> <C-\><C-N><C-w>k
-     tnoremap <C-l> <C-\><C-N><C-w>l
-     inoremap <C-h> <C-\><C-N><C-w>h
-     inoremap <C-j> <C-\><C-N><C-w>j
-     inoremap <C-k> <C-\><C-N><C-w>k
-     inoremap <C-l> <C-\><C-N><C-w>l
-     noremap <A-c> "+y
-     noremap <A-v> "+p
      nnoremap <expr> <leader>t ":call Term()\<CR>"
-"      nnoremap <A-h> <C-w>h
-"      nnoremap <A-j> <C-w>j
-"      nnoremap <A-k> <C-w>k
-"      nnoremap <A-l> <C-w>l
 endif
 
 "}}}
@@ -184,14 +186,17 @@ augroup filetype_md
 augroup END
 
 " Ansible
-augroup filetype_md
+augroup filetype_yml
     autocmd!
     au Filetype yaml set tabstop=2 expandtab shiftwidth=2 filetype=ansible foldmethod=indent fml=10
+    nnoremap <silent> ]r g_vBy:e ./**/0/tasks/main.yml
 augroup END
 
 " start terminal in insert mode
 if has('nvim')
+    autocmd!
     autocmd TermOpen,BufEnter term://* startinsert
+    set termguicolors
 endif
 
 "}}}
@@ -211,7 +216,7 @@ augroup customHighlight
     set cursorline guicursor=n:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
 augroup END
 
-colorscheme delek
+colorscheme solarized8_dark_flat
 
 
 " Add spaces after comment delimiters by default
