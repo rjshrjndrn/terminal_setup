@@ -12,8 +12,11 @@ call vundle#begin()
 
 
 " Theme
-Plugin 'lifepillar/vim-solarized8'
+" Plugin 'lifepillar/vim-solarized8'
+Plugin 'morhetz/gruvbox'
 " Plugins
+Plugin 'tpope/vim-dispatch'
+Plugin 'radenling/vim-dispatch-neovim'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'junegunn/fzf'
 Plugin 'tpope/vim-surround'
@@ -89,6 +92,10 @@ function! BufOnly()
     :%bd | e#
 endfunction
 
+function! GlogThis()
+    :Glog -- % | copen<CR>
+endfunction
+
 " Commands
 command! BufOnly call BufOnly()
 " keyboad mappings {{{
@@ -131,9 +138,11 @@ nnoremap gw :Gwrite<Enter>
 nnoremap gs :Gstatus<Enter>
 nnoremap gc :Gcommit<Enter>
 nnoremap gp :Gpush
-nnoremap gpl :Gpull
+nnoremap gpl :Dispatch git pull --rebase
 nnoremap gca :Gcommit --amend
 nnoremap gpl :Gpull --rebase<CR>
+nnoremap gl :Glog -- % --
+
 autocmd BufReadPost fugitive://* set bufhidden=delete
 " Commenting for fugitive commit session
 " will take branch name as #Issue-number
@@ -143,7 +152,6 @@ let @e='5G$vByggIIssue #0000 feat: pggA'
 let g:ycm_python_binary_path = '/usr/bin/python3'
 let g:ycm_seed_identifiers_with_syntax = 1
 nnoremap gr :YcmCompleter GetDoc<Enter>
-let g:ycm_key_invoke_completion = '<c-x>'
 let g:ycm_autoclose_preview_window_after_completion=1
 
 "NERDTreefind
@@ -152,7 +160,7 @@ nnoremap <silent> ff :NERDTreeFind <Enter>
 nnoremap <silent> <C-n> :NERDTreeToggle<CR>
 
 " Markdown web preview
-nnoremap <leader>md :!bash ~/grip.sh start "%" & <enter>
+nnoremap <leader>md :Dispatch !bash ~/grip.sh start "%" <CR>
 " Killing grip md server
 nnoremap <leader>mk :!bash ~/grip.sh stop <enter>
 
@@ -188,8 +196,9 @@ augroup END
 " Ansible
 augroup filetype_yml
     autocmd!
-    au Filetype yaml set tabstop=2 expandtab shiftwidth=2 filetype=ansible foldmethod=indent fml=10
-    nnoremap <silent> ]r g_vBy:e ./**/0/tasks/main.yml
+    au Filetype yaml set tabstop=2 expandtab shiftwidth=2 filetype=ansible " foldmethod=indent fml=10
+    " nnoremap <silent> ]r g_vBy:e ./**/0/tasks/main.yml
+    nnoremap <silent> ]r WWyE:e ./**/0/tasks/main.y*ml   
 augroup END
 
 " start terminal in insert mode
@@ -201,36 +210,21 @@ endif
 
 "}}}
 
+colorscheme gruvbox
+
 "airline bar
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='badcat'
-
-
-" vim theme
-" Customizing cursor to be less obstusive
-" This line should be before the colourscheme
-augroup customHighlight
-    autocmd!
-    autocmd ColorScheme * highlight clear LineNr | set cursorline | highlight clear cursorline
-    autocmd ColorScheme * highlight CursorLineNr cterm=bold ctermfg=black | highlight Search ctermfg=black ctermbg=gray
-    set cursorline guicursor=n:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
-augroup END
-
-colorscheme solarized8_dark_flat
-
+let g:airline_theme='angr'
 
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 
 " Use compact syntax for prettified multi-line comments
 let g:NERDCompactSexyComs = 1
-
 " Align line-wise comment delimiters flush left instead of following code indentation
 let g:NERDDefaultAlign = 'left'
-
 " Allow commenting and inverting empty lines (useful when commenting a region)
 let g:NERDCommentEmptyLines = 1
-
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
@@ -240,3 +234,6 @@ let g:indent_guides_enable_on_vim_startup = 1
 "custom file based remapings
 au FileType go nmap <leader>r :!go run %<Enter>
 
+set background=dark
+let g:gruvbox_contrast_dark = 'medium'
+let g:gruvbox_italicize_comments = 1
