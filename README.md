@@ -25,6 +25,8 @@ And I found my better half...
 
 ### Installation
 
+*Depricated*
+
 `bash bootstrapper.sh`
 
 [ZSH](https://duckduckgo.com/?q=zsh&t=canonical&ia=web) + [Z](https://github.com/rupa/z/blob/master/z.sh) + [Oh-my-ZSH](https://github.com/robbyrussell/oh-my-zsh) + some awesome plugins
