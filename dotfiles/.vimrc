@@ -197,8 +197,8 @@ augroup END
 augroup filetype_yml
     autocmd!
     au Filetype yaml set tabstop=2 expandtab shiftwidth=2 filetype=ansible " foldmethod=indent fml=10
-    " nnoremap <silent> ]r g_vBy:e ./**/0/tasks/main.yml
-    nnoremap <silent> ]r WWyE:e ./**/0/tasks/main.y*ml   
+    " nnoremap <silent> ]r WWyE:e ./roles/0/tasks/main.y*ml   
+    nnoremap <silent> ]r 0f-WvEy:e ./roles/0/tasks/main.yml 
 augroup END
 
 " start terminal in insert mode
