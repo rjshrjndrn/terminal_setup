@@ -148,6 +148,9 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 " will take branch name as #Issue-number
 let @e='5G$vByggIIssue #0000 feat: pggA'
 
+" Change ansible from old = to new : form
+let @q='ff=s: f=Bi@q[b,qjjjjjjjj[b'
+
 "YouCompleteMe
 let g:ycm_python_binary_path = '/usr/bin/python3'
 let g:ycm_seed_identifiers_with_syntax = 1
@@ -197,7 +200,6 @@ augroup END
 augroup filetype_yml
     autocmd!
     au Filetype yaml set tabstop=2 expandtab shiftwidth=2 filetype=ansible " foldmethod=indent fml=10
-    " nnoremap <silent> ]r WWyE:e ./roles/0/tasks/main.y*ml   
     nnoremap <silent> ]r 0f-WvEy:e ./roles/0/tasks/main.yml 
 augroup END
 
