@@ -25,7 +25,7 @@ And I found my better half...
 
 ### Installation
 
-**Depricated*
+**Depricated**
 
 `bash bootstrapper.sh`
 
