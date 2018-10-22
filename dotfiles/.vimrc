@@ -138,9 +138,12 @@ nnoremap gw :Gwrite<Enter>
 nnoremap gs :Gstatus<Enter>
 nnoremap gc :Gcommit<Enter>
 nnoremap gp :Gpush
-nnoremap gpl :Dispatch git pull --rebase
 nnoremap gca :Gcommit --amend
-nnoremap gpl :Gpull --rebase<CR>
+function! Gpl()
+    :Gfetch | git rebase
+endfunction
+
+nnoremap gpl :call Gpl()
 nnoremap gl :Glog -- % --
 
 autocmd BufReadPost fugitive://* set bufhidden=delete
