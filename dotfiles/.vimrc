@@ -15,6 +15,7 @@ call vundle#begin()
 " Plugin 'lifepillar/vim-solarized8'
 Plugin 'morhetz/gruvbox'
 " Plugins
+Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'tpope/vim-dispatch'
 Plugin 'radenling/vim-dispatch-neovim'
 Plugin 'tpope/vim-unimpaired'
@@ -131,6 +132,7 @@ nnoremap <C-a> <esc>ggVG<CR>
 " au BufNewFile,BufRead *.py,*.go set foldmethod=indent 
 nnoremap <space> za
 nnoremap <S-space> zA
+vnoremap <silent> <space> :fold<CR>
 
 
 "fugitive vim
@@ -209,7 +211,7 @@ augroup END
 " start terminal in insert mode
 if has('nvim')
     autocmd!
-    autocmd TermOpen,BufEnter term://* startinsert
+    autocmd TermOpen term://* startinsert
     set termguicolors
 endif
 
