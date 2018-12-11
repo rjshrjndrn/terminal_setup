@@ -15,6 +15,7 @@ call vundle#begin()
 " Plugin 'lifepillar/vim-solarized8'
 Plugin 'morhetz/gruvbox'
 " Plugins
+Plugin 'hashivim/vim-terraform'
 Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'tpope/vim-dispatch'
 Plugin 'radenling/vim-dispatch-neovim'
@@ -97,6 +98,10 @@ function! GlogThis()
     :Glog -- % | copen<CR>
 endfunction
 
+function! FugDel()
+    :bdelete fugitive://*
+endfunction
+
 " Commands
 command! BufOnly call BufOnly()
 " keyboad mappings {{{
@@ -125,14 +130,10 @@ nnoremap <leader>q :q<Enter>
 nnoremap <leader>wq :wq<Enter>
 nnoremap <leader>1q :q!<Enter>
 
-" Ctrl+a to select all
-nnoremap <C-a> <esc>ggVG<CR>
-
 " Folding
 " au BufNewFile,BufRead *.py,*.go set foldmethod=indent 
-nnoremap <space> za
-nnoremap <S-space> zA
 vnoremap <silent> <space> :fold<CR>
+nnoremap <silent> <space> za<CR>
 
 
 "fugitive vim
@@ -141,17 +142,20 @@ nnoremap gs :Gstatus<Enter>
 nnoremap gc :Gcommit<Enter>
 nnoremap gp :Gpush
 nnoremap gca :Gcommit --amend
-function! Gpl()
+function! Gfl()
     :Gfetch | git rebase
 endfunction
 
-nnoremap gpl :call Gpl()
+nnoremap gpl :Gpull --rebase
+nnoremap gfl :call Gfl()
 nnoremap gl :Glog -- % --
 
-autocmd BufReadPost fugitive://* set bufhidden=delete
+nnoremap <silent> <leader>fd :call FugDel()<CR>
+
 " Commenting for fugitive commit session
 " will take branch name as #Issue-number
-let @e='5G$vByggIIssue #0000 feat: pggA'
+let @c='5G$vByggIIssue #000 feat: pggA'
+let @e='ggIIssue #000 feat: DO-306ggA'
 
 " Change ansible from old = to new : form
 let @q='ff=s: f=Bi@q[b,qjjjjjjjj[b'
@@ -205,7 +209,7 @@ augroup END
 augroup filetype_yml
     autocmd!
     au Filetype yaml set tabstop=2 expandtab shiftwidth=2 filetype=ansible " foldmethod=indent fml=10
-    nnoremap <silent> ]r 0f-WvEy:e ./roles/0/tasks/main.yml 
+    nnoremap <silent> ]r 0f-WvEy:find roles/0/tasks/main.yml 
 augroup END
 
 " start terminal in insert mode
@@ -244,3 +248,12 @@ au FileType go nmap <leader>r :!go run %<Enter>
 set background=dark
 let g:gruvbox_contrast_dark = 'medium'
 let g:gruvbox_italicize_comments = 1
+
+" Enabling mouse in auo mode
+set mouse=a
+
+
+" Terraform variables
+let g:terraform_fmt_on_save=1
+let g:terraform_fold_sections=1
+let g:terraform_align=1
