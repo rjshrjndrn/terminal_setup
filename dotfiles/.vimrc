@@ -15,6 +15,7 @@ call vundle#begin()
 " Plugin 'lifepillar/vim-solarized8'
 Plugin 'morhetz/gruvbox'
 " Plugins
+Plugin 'martinda/Jenkinsfile-vim-syntax'
 Plugin 'hashivim/vim-terraform'
 Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'tpope/vim-dispatch'
