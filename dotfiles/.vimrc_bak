@@ -13,13 +13,7 @@ call vundle#begin()
 
 " Theme
 " Plugin 'lifepillar/vim-solarized8'
-Plugin 'morhetz/gruvbox'
 " Plugins
-Plugin 'martinda/Jenkinsfile-vim-syntax'
-Plugin 'hashivim/vim-terraform'
-Plugin 'michaeljsmith/vim-indent-object'
-Plugin 'tpope/vim-dispatch'
-Plugin 'radenling/vim-dispatch-neovim'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'junegunn/fzf'
 Plugin 'tpope/vim-surround'
@@ -95,21 +89,12 @@ function! BufOnly()
     :%bd | e#
 endfunction
 
-function! SelectAll()
-    ggVG
-endfunction
-
 function! GlogThis()
     :Glog -- % | copen<CR>
 endfunction
 
-function! FugDel()
-    :bdelete fugitive://*
-endfunction
-
 " Commands
 command! BufOnly call BufOnly()
-command! SelectAll call SelectAll()
 " keyboad mappings {{{
 " visual select
 vnoremap // "zy/<C-R>z<CR>
@@ -136,10 +121,13 @@ nnoremap <leader>q :q<Enter>
 nnoremap <leader>wq :wq<Enter>
 nnoremap <leader>1q :q!<Enter>
 
+" Ctrl+a to select all
+nnoremap <C-a> <esc>ggVG<CR>
+
 " Folding
-" au BufNewFile,BufRead *.py,*.go set foldmethod=indent
-vnoremap <silent> <space> :fold<CR>
-nnoremap <silent> <space> za<CR>
+" au BufNewFile,BufRead *.py,*.go set foldmethod=indent 
+nnoremap <space> za
+nnoremap <S-space> zA
 
 
 "fugitive vim
@@ -147,30 +135,23 @@ nnoremap gw :Gwrite<Enter>
 nnoremap gs :Gstatus<Enter>
 nnoremap gc :Gcommit<Enter>
 nnoremap gp :Gpush
+nnoremap gpl :Gpull
 nnoremap gca :Gcommit --amend
-function! Gfl()
-    :Gfetch | git rebase
-endfunction
+nnoremap gpl :Gpull --rebase<CR>
 
-nnoremap gpl :Gpull --rebase
-nnoremap gfl :call Gfl()
-nnoremap gl :Glog -- % --
 
-nnoremap <silent> <leader>fd :call FugDel()<CR>
+nnoremap gl :Glog -- %
 
+autocmd BufReadPost fugitive://* set bufhidden=delete
 " Commenting for fugitive commit session
 " will take branch name as #Issue-number
-let @w='5G$vByggIIssue #000 feat: pggA'
-let @e='ggIIssue #000 feat: '
-let @r='ggIChore #000 feat: '
-
-" Change ansible from old = to new : form
-let @q='ff=s: f=Bi@q[b,qjjjjjjjj[b'
+let @e='5G$vByggIIssue #0000 feat: pggA'
 
 "YouCompleteMe
 let g:ycm_python_binary_path = '/usr/bin/python3'
 let g:ycm_seed_identifiers_with_syntax = 1
 nnoremap gr :YcmCompleter GetDoc<Enter>
+let g:ycm_key_invoke_completion = '<c-x>'
 let g:ycm_autoclose_preview_window_after_completion=1
 
 "NERDTreefind
@@ -179,7 +160,7 @@ nnoremap <silent> ff :NERDTreeFind <Enter>
 nnoremap <silent> <C-n> :NERDTreeToggle<CR>
 
 " Markdown web preview
-nnoremap <leader>md :Dispatch !bash ~/grip.sh start "%" <CR>
+nnoremap <leader>md :!bash ~/grip.sh start "%" & <enter>
 " Killing grip md server
 nnoremap <leader>mk :!bash ~/grip.sh stop <enter>
 
@@ -201,9 +182,9 @@ endif
 
 " Autocmd Commands {{{
 " Vim
-augroup filetype_vim
+augroup filetype_vim 
     autocmd!
-    autocmd Filetype vim,python,sh setlocal foldmethod=marker shiftwidth=4 tabstop =4
+    autocmd Filetype vim,python,sh setlocal foldmethod=marker shiftwidth=4 tabstop =4 
 augroup END
 
 " Markdown specific highlights
@@ -215,34 +196,54 @@ augroup END
 " Ansible
 augroup filetype_yml
     autocmd!
-    au Filetype yaml set tabstop=2 expandtab shiftwidth=2 filetype=ansible " foldmethod=indent fml=10
-    nnoremap <silent> ]r 0f-WvEy:find roles/0/tasks/main.yml
+    au Filetype yaml set tabstop=2 expandtab shiftwidth=2 filetype=ansible foldmethod=indent fml=10
+    " nnoremap <silent> ]r g_vBy:e ./**/0/tasks/main.yml
+    nnoremap <silent> ]r WWyE:e ./**/0/tasks/main.y*ml   
 augroup END
 
 " start terminal in insert mode
 if has('nvim')
     autocmd!
-    autocmd TermOpen term://* startinsert
+    autocmd TermOpen,BufEnter term://* startinsert
     set termguicolors
 endif
 
 "}}}
 
-colorscheme gruvbox
-
 "airline bar
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='angr'
+
+
+" " vim theme
+" " Customizing cursor to be less obtrusive
+" " This line should be before the colourscheme
+" set background=dark
+"
+" augroup customHighlight
+"     autocmd!
+"     autocmd ColorScheme * highlight CursorLineNr cterm=bold ctermfg=black
+"     autocmd ColorScheme * highlight Search ctermfg=black ctermbg=gray
+"     autocmd ColorScheme * highlight clear LineNr
+"     autocmd ColorScheme * set cursorline guicursor=n:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+"     autocmd ColorScheme * highlight clear cursorline
+" augroup END
+
+" colorscheme solarized8_flat
+
 
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 
 " Use compact syntax for prettified multi-line comments
 let g:NERDCompactSexyComs = 1
+
 " Align line-wise comment delimiters flush left instead of following code indentation
 let g:NERDDefaultAlign = 'left'
+
 " Allow commenting and inverting empty lines (useful when commenting a region)
 let g:NERDCommentEmptyLines = 1
+
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
@@ -251,16 +252,3 @@ let g:indent_guides_enable_on_vim_startup = 1
 
 "custom file based remapings
 au FileType go nmap <leader>r :!go run %<Enter>
-
-set background=dark
-let g:gruvbox_contrast_dark = 'medium'
-let g:gruvbox_italicize_comments = 1
-
-" Enabling mouse in auo mode
-set mouse=a
-
-
-" Terraform variables
-let g:terraform_fmt_on_save=1
-let g:terraform_fold_sections=1
-let g:terraform_align=1
