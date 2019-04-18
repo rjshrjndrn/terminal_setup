@@ -1,5 +1,9 @@
 set encoding=utf-8
+" Enabling truecolors
+set termguicolors
 
+
+"{{{
 call plug#begin('~/.vim/bundle')
 
 " On-demand loading
@@ -22,6 +26,7 @@ Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-jedi'
 Plug 'ncm2/ncm2-go'
 
+Plug 'w0rp/ale'
 Plug 'lifepillar/vim-solarized8'
 Plug 'morhetz/gruvbox'
 Plug 'junegunn/fzf'
@@ -47,9 +52,12 @@ Plug 'tpope/vim-obsession'
 Plug 'vimwiki/vimwiki'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
+Plug 'mattn/emmet-vim', { 'for': 'html,css'}
+
 " Initialize plugin system
 call plug#end()
 
+"}}}
 
 " IMPORTANT: :help Ncm2PopupOpen for more information
 set completeopt=noinsert,menuone,noselect
@@ -126,6 +134,7 @@ let g:auto_save_noupdatetime = 1
 let g:auto_save_in_insert_mode = 0
 
 " Functions
+" {{{
 function! Term()
   exec winheight(0)/4."split" | set nonu | terminal
 endfunction
@@ -133,6 +142,9 @@ function! TermTab()
   tabnew | set nonu | terminal
 endfunction
 
+function! Scrap()
+  exec winwidth(0)/4."vsplit" | edit ~/Documents/scrapnotes/scrapnote.md
+endfunction
 function! BufOnly()
     :%bd | e#
 endfunction
@@ -148,18 +160,25 @@ endfunction
 function! FugDel()
     :bdelete fugitive://*
 endfunction
+"}}}
 
 " Commands
 command! BufOnly call BufOnly()
 command! TrailClear call TrailClear()
+command! Scrap call Scrap()
 
 " keyboad mappings {{{
 " visual select
 vnoremap // "zy/<C-R>z<CR>
-let g:FerretMaxResults=0
+vnoremap /b "zy:Back! <C-R>z<CR>
+vnoremap /B "zy:Back! -w <C-R>z<CR>
+let g:FerretMaxResults=1000
+
+let g:user_emmet_leader_key='<C-l>'
 
 " vnoremap /s "zy:Ack! -w --ignore *\.wiki --ignore *doc --ignore ekstep-devops z
-vnoremap <silent> /s "zy:Ack! -w --ignore *\.wiki --ignore *doc z
+vnoremap <silent> /S "zy:Ack! -w --ignore *\.wiki --ignore *doc z
+vnoremap <silent> /s "zy:Ack! --ignore *\.wiki --ignore *doc z
 " Ansible doc
 vnoremap <silent> /D "zy:!ansible-doc z
 
@@ -190,6 +209,7 @@ nnoremap <leader>1q :q!<Enter>
 " Folding
 " au BufNewFile,BufRead *.py,*.go set foldmethod=indent
 vnoremap <silent> <space> :fold<CR>
+set foldmethod=indent foldlevel=10
 nnoremap <silent> <space> za<CR>
 
 
@@ -212,6 +232,18 @@ nnoremap gpl :Gpull --rebase
 nnoremap gfl :call Gfl()
 nnoremap gl :Glog -- % --
 
+function! DiffToggle(diff)
+    "named argument diff
+    if a:diff
+        :windo diffoff
+    else
+        :windo diffthis
+    endif
+endfunction
+
+
+
+nnoremap <silent> <leader>d :call DiffToggle(&diff)<CR>
 nnoremap <silent> <leader>fd :call FugDel()<CR>
 
 " Commenting for fugitive commit session
@@ -232,7 +264,7 @@ nnoremap <silent> ff :NERDTreeFind <Enter>
 nnoremap <silent> <C-n> :NERDTreeToggle<CR>
 
 " Markdown web preview
-nnoremap <leader>md :Dispatch !bash ~/grip.sh start '%' <CR>
+nnoremap <leader>md :Dispatch !bash ~/grip.sh start % <CR>
 " Killing grip md server
 nnoremap <leader>mk :!bash ~/grip.sh stop <enter>
 
@@ -256,7 +288,40 @@ endif
 let g:FerretJob=0
 "airline bar
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='angr'
+" let g:airline_theme='angr'
+if !exists('g:airline_symbols')
+let g:airline_symbols = {}
+endif
+
+" powerline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.maxlinenr = ''
+
+" " old vim-powerline symbols
+" let g:airline_left_sep = '⮀'
+" " let g:airline_left_alt_sep = '⮁'
+" let g:airline_right_sep = '⮂'
+" " let g:airline_right_alt_sep = '⮃'
+" let g:airline_symbols.branch = '⭠'
+" let g:airline_symbols.readonly = '⭤'
+" let g:airline_symbols.linenr = '⭡'
+
+" let g:airline_section_b = '%-0.10{getcwd()}'
+let g:airline_section_c = '%t'
+" Enable fugitive
+let g:airline#extensions#branch#enabled = 1
+" to truncate all path sections but the last one, e.g. a branch
+" 'foo/bar/baz' becomes 'f/b/baz', use
+let g:airline#extensions#branch#format = 2
+ call airline#parts#define('branch', {
+        \ 'raw': '',
+        \ 'minwidth': 120})
 
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
@@ -323,10 +388,11 @@ endif
 "}}}
 
 
-syn on
-noswapfile
-" Enabling truecolors
-set termguicolors
+" set noswapfile nobackup nowb
+set scrolloff=3
+set confirm autoread
+" make . to work with visually selected lines
+vnoremap . :normal.<CR>
 
 " Temporary ansible refactor LP and DP find var
 let @d='/.*d-data-p.*\(ansible\|role\)'

@@ -161,8 +161,8 @@ nnoremap <silent> <leader>fd :call FugDel()<CR>
 " Commenting for fugitive commit session
 " will take branch name as #Issue-number
 let @w='5G$vByggIIssue #000 feat: pggA'
-let @e='ggIIssue #000 feat: '
-let @r='ggIChore #000 feat: '
+let @e='ggIChore #000 feat: '
+let @r='ggIIssue #000 feat: '
 
 " Change ansible from old = to new : form
 let @q='ff=s: f=Bi@q[b,qjjjjjjjj[b'
