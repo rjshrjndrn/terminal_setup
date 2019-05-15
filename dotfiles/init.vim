@@ -54,7 +54,7 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'tpope/vim-obsession'
 
 Plug 'vimwiki/vimwiki'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 
 Plug 'mattn/emmet-vim', { 'for': 'html,css'}
 
@@ -181,8 +181,9 @@ let g:FerretMaxResults=1000
 let g:user_emmet_leader_key='<C-l>'
 
 " vnoremap /s "zy:Ack! -w --ignore *\.wiki --ignore *doc --ignore ekstep-devops z
-vnoremap <silent> /S "zy:Ack! -w --ignore *\.wiki --ignore *doc z
-vnoremap <silent> /s "zy:Ack! --ignore *\.wiki --ignore *doc z
+vnoremap <silent> /S "zy:Ack! -w  z
+vnoremap <silent> /s "zy:Ack!  z
+" vnoremap <silent> /s "zy:Ack! --ignore *\.wiki --ignore *doc z
 " Ansible doc
 vnoremap <silent> /D "zy:!ansible-doc z
 
@@ -213,7 +214,6 @@ nnoremap <leader>1q :q!<Enter>
 " Folding
 " au BufNewFile,BufRead *.py,*.go set foldmethod=indent
 vnoremap <silent> <space> :fold<CR>
-set foldmethod=indent foldlevel=10
 nnoremap <silent> <space> za<CR>
 
 
@@ -268,7 +268,8 @@ nnoremap <silent> ff :NERDTreeFind <Enter>
 nnoremap <silent> <C-n> :NERDTreeToggle<CR>
 
 " Markdown web preview
-nnoremap <leader>md :Dispatch !bash ~/grip.sh start % <CR>
+nnoremap <silent> <leader>md <plug>MarkdownPreviewToggle
+
 " Killing grip md server
 nnoremap <leader>mk :!bash ~/grip.sh stop <enter>
 
@@ -343,6 +344,9 @@ let g:NERDTrimTrailingWhitespace = 1
 let wiki_personal= {'path': '~/vimwiki_personal/', 'syntax': 'markdown', 'ext': '.md'}
 let wiki_work = {'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}
 let g:vimwiki_list = [wiki_work, wiki_personal]
+let g:vimwiki_ext2syntax = {'.md': 'markdown',
+                  \ '.mkd': 'markdown',
+                  \ '.wiki': 'media'}
 map gc<Space> <Plug>VimwikiToggleListItem
 
 " Intent
@@ -367,7 +371,7 @@ let g:terraform_align=1
 " Vim
 augroup filetypes
     autocmd!
-    autocmd BufWritePre /tmp/* setlocal noundofile
+    " autocmd BufEnter,BufWritePre *.yml set foldmethod=indent foldlevel=10
     autocmd Filetype vim,python,sh setlocal foldmethod=marker shiftwidth=4 tabstop =4  expandtab
     autocmd Filetype gitcommit setlocal spell
     autocmd Filetype git setlocal nofoldenable
