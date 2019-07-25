@@ -16,11 +16,9 @@ Plug 'scrooloose/nerdtree'
 " assuming you're using vim-plug: https://github.com/junegunn/vim-plug
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
-" LanguageServer client for NeoVim.
-Plug 'autozimu/LanguageClient-neovim', {
-\ 'branch': 'next',
-\ 'do': 'bash install.sh',
-\ }
+
+" Run gofmt and goimports on save
+" autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
 
 " NOTE: you need to install completion sources to get completions. Check
 " our wiki page for a list of sources: https://github.com/ncm2/ncm2/wiki
@@ -28,9 +26,26 @@ Plug 'ncm2/ncm2-bufword'
 Plug 'ncm2/ncm2-tmux'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-jedi'
-Plug 'ncm2/ncm2-go'
+" Plug 'ncm2/ncm2-go'
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
 
 Plug 'w0rp/ale'
+let b:ale_completion_enabled = 1
+let b:ale_fixers = {
+\   'ansible': [
+\       'remove_trailing_lines', 
+\       'trim_whitespace',
+\   ],
+\   'go': ['goimports', 'gofmt'],
+\   'javascript': ['eslint'],
+\}
+let b:ale_linters = {
+    \ 'go': ['gopls'],
+    \ 'ansible': ['ansible-lint'],
+    \}
+let b:ale_fix_on_save = 1
+
 Plug 'lifepillar/vim-solarized8'
 Plug 'morhetz/gruvbox'
 Plug 'junegunn/fzf'
@@ -49,6 +64,7 @@ Plug 'radenling/vim-dispatch-neovim'
 Plug 'vim-scripts/vim-auto-save'
 Plug 'nvie/vim-flake8'
 Plug 'wincent/ferret'
+Plug 'easymotion/vim-easymotion'
 
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'tpope/vim-obsession'
@@ -57,6 +73,7 @@ Plug 'vimwiki/vimwiki'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 
 Plug 'mattn/emmet-vim', { 'for': 'html,css'}
+Plug 'mbbill/undotree'
 
 " Initialize plugin system
 call plug#end()
@@ -70,6 +87,8 @@ set completeopt=noinsert,menuone,noselect
     " found' messages
     set shortmess+=c
 
+    " May be lang server autocompletion
+    au TextChangedI * call ncm2#auto_trigger()
     " CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
     inoremap <c-c> <ESC>
 
@@ -160,16 +179,20 @@ endfunction
 function! GlogThis()
     :Glog -- % | copen<CR>
 endfunction
-
-function! FugDel()
-    :bdelete fugitive://*
+function! AnsiVarFix()
+    :%s/{{\(\w\+\)}}/{{ \1 }}/g
 endfunction
+
+" function! FugDel()
+"     :bdelete fugitive://*
+" endfunction
 "}}}
 
 " Commands
 command! BufOnly call BufOnly()
 command! TrailClear call TrailClear()
 command! Scrap call Scrap()
+command! AnsiVarFix call AnsiVarFix()
 
 " keyboad mappings {{{
 " visual select
@@ -179,6 +202,9 @@ vnoremap /B "zy:Back! -w <C-R>z<CR>
 let g:FerretMaxResults=1000
 
 let g:user_emmet_leader_key='<C-l>'
+
+"Undo map
+nnoremap <silent> U :UndotreeToggle<CR>:UndotreeFocus<CR>
 
 " vnoremap /s "zy:Ack! -w --ignore *\.wiki --ignore *doc --ignore ekstep-devops z
 vnoremap <silent> /S "zy:Ack! -w  z
@@ -227,11 +253,6 @@ function! Gfl()
     :Gfetch | git rebase
 endfunction
 
-function! SetMarkdownOptions()
-call VimwikiSet('syntax', 'markdown')
-" call VimwikiSet('custom_wiki2html', 'wiki2html.sh')
-endfunction
-
 nnoremap gpl :Gpull --rebase
 nnoremap gfl :call Gfl()
 nnoremap gl :Glog -- % --
@@ -246,6 +267,17 @@ function! DiffToggle(diff)
 endfunction
 
 
+" Easymotion plug
+" Jump to anywhere you want with minimal keystrokes, with just one key binding.
+" `s{char}{label}`
+nmap <silent> z <Plug>(easymotion-overwin-f2)
+
+" Replacing hjkl
+" Gif config
+map  <silent> <Leader>j <Plug>(easymotion-j)
+map <silent> <Leader>k <Plug>(easymotion-k)
+let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
+
 
 nnoremap <silent> <leader>d :call DiffToggle(&diff)<CR>
 nnoremap <silent> <leader>fd :call FugDel()<CR>
@@ -259,6 +291,7 @@ let @r='ggIIssue #000 chore: '
 " Change ansible from old = to new : form
 let @q='ff=s: f=Bi@q[b,qjjjjjjjj[b'
 
+" colorscheme solarized8_flat
 colorscheme gruvbox
 set background=dark
 
@@ -275,9 +308,6 @@ nnoremap <leader>mk :!bash ~/grip.sh stop <enter>
 
 " Write files without permission
 nnoremap sw :w !sudo tee % > /dev/null
-
-" toggle hls
-nnoremap <silent> <leader>h :set hls!<CR>
 
 " Copying to system clipboard
 vnoremap Y "+y
@@ -377,6 +407,7 @@ augroup filetypes
     autocmd Filetype git setlocal nofoldenable
     autocmd BufEnter ".*\.md$" setlocal spell tabstop=2 expandtab shiftwidth=2 ft=markdown
     autocmd BufEnter Jenkinsfile setlocal ft=groovy
+    autocmd FileType vimwiki let b:auto_save=1
 augroup END
 
 
