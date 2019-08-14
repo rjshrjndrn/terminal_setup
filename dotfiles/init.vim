@@ -29,11 +29,11 @@ Plug 'ncm2/ncm2-jedi'
 " Plug 'ncm2/ncm2-go'
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
-
 Plug 'w0rp/ale'
 let b:ale_completion_enabled = 1
 let b:ale_fixers = {
 \   'ansible': [
+\       'prettier',
 \       'remove_trailing_lines', 
 \       'trim_whitespace',
 \   ],
@@ -42,7 +42,7 @@ let b:ale_fixers = {
 \}
 let b:ale_linters = {
     \ 'go': ['gopls'],
-    \ 'ansible': ['ansible-lint'],
+    \ 'yaml.ansible': ['ansible-lint'],
     \}
 let b:ale_fix_on_save = 1
 
@@ -56,7 +56,6 @@ Plug 'tpope/vim-rhubarb'
 Plug 'scrooloose/nerdcommenter'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'chase/vim-ansible-yaml'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-dispatch'
@@ -74,6 +73,28 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 
 Plug 'mattn/emmet-vim', { 'for': 'html,css'}
 Plug 'mbbill/undotree'
+
+Plug 'SirVer/ultisnips'
+Plug 'ncm2/ncm2-ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
+Plug 'honza/vim-snippets'
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<C-i>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+Plug 'andrewstuart/vim-kubernetes'
+
+
+
+Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; ./generate.py --style dictionary' }
+let g:ansible_attribute_highlight = "ob"
+let g:ansible_name_highlight = 'd'
+let g:ansible_extra_keywords_highlight = 1
+let g:ansible_normal_keywords_highlight = 'Constant'
 
 " Initialize plugin system
 call plug#end()
@@ -279,6 +300,10 @@ map <silent> <Leader>k <Plug>(easymotion-k)
 let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
 
 
+" ALE mapping
+nmap <silent> [n <Plug>(ale_previous_wrap)
+nmap <silent> ]n <Plug>(ale_next_wrap)
+
 nnoremap <silent> <leader>d :call DiffToggle(&diff)<CR>
 nnoremap <silent> <leader>fd :call FugDel()<CR>
 
@@ -403,9 +428,10 @@ augroup filetypes
     autocmd!
     " autocmd BufEnter,BufWritePre *.yml set foldmethod=indent foldlevel=10
     autocmd Filetype vim,python,sh setlocal foldmethod=marker shiftwidth=4 tabstop =4  expandtab
+    autocmd Filetype yaml setlocal shiftwidth=2 tabstop=2 expandtab
     autocmd Filetype gitcommit setlocal spell
     autocmd Filetype git setlocal nofoldenable
-    autocmd BufEnter ".*\.md$" setlocal spell tabstop=2 expandtab shiftwidth=2 ft=markdown
+    autocmd BufEnter ".*\.md$" set spell tabstop=2 expandtab shiftwidth=2 ft=markdown
     autocmd BufEnter Jenkinsfile setlocal ft=groovy
     autocmd FileType vimwiki let b:auto_save=1
 augroup END
@@ -414,7 +440,7 @@ augroup END
 " Ansible
 augroup filetype_yml
     autocmd!
-    au Filetype yaml set tabstop=2 expandtab shiftwidth=2 filetype=ansible " foldmethod=indent fml=10
+    au BufRead,BufNewFile *.y[a]?ml set tabstop=2 expandtab shiftwidth=2 filetype=yaml.ansible  " foldmethod=indent fml=10
     nnoremap <silent> ]r 0f-WvEy:find roles/0/tasks/main.yml
     nnoremap <silent> <leader>at :!ansible-playbook % --syntax-check<CR>
 augroup END
