@@ -27,14 +27,14 @@ Plug 'ncm2/ncm2-tmux'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-jedi'
 " Plug 'ncm2/ncm2-go'
-" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 Plug 'w0rp/ale'
 let b:ale_completion_enabled = 1
 let b:ale_fixers = {
 \   'ansible': [
 \       'prettier',
-\       'remove_trailing_lines', 
+\       'remove_trailing_lines',
 \       'trim_whitespace',
 \   ],
 \   'go': ['goimports', 'gofmt'],
@@ -77,19 +77,17 @@ Plug 'mbbill/undotree'
 Plug 'SirVer/ultisnips'
 Plug 'ncm2/ncm2-ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
-Plug 'honza/vim-snippets'
+" Plug 'honza/vim-snippets'
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<C-i>"
+let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
 Plug 'andrewstuart/vim-kubernetes'
-
-
-
 Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; ./generate.py --style dictionary' }
 let g:ansible_attribute_highlight = "ob"
 let g:ansible_name_highlight = 'd'
@@ -465,3 +463,20 @@ let @l='/.*d-learning-p.*\(ansible\|role\)'
 let @p='/public-devops\/ansible\/\(roles\/\S\{-}\/\|.\+group_vars\|\S\+\.y\)'
 " enable ncm2 for all buffers
 autocmd BufEnter * call ncm2#enable_for_buffer()
+
+function! VimwikiLinkHandler(link)
+    let link = a:link
+    if link =~# '^vfile:'
+        let link = link[1:]
+    else
+        return 0
+    endif
+    let link_infos = vimwiki#base#resolve_link(link)
+    if link_infos.filename ==? ''
+        echomsg 'Vimwiki Error: Unable to resolve link!'
+        return 0
+    else
+        exe 'edit' . fnameescape(link_infos.filename)
+        return 1
+    endif
+endfunction
