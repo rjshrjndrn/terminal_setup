@@ -69,3 +69,6 @@ ln -s /opt/kubectx/completion/kubens.zsh ~/.oh-my-zsh/completions/_kubens.zsh
 
 font
 [Fira code](https://github.com/tonsky/FiraCode/wiki/Linux-instructions)
+
+Shell:
+[SpaceShip](https://denysdovhan.com/spaceship-prompt/#oh-my-zsh)
