@@ -66,3 +66,6 @@ ssh rajesh@10.0.3.2 # some server
 kube
 ln -s /opt/kubectx/completion/kubectx.zsh ~/.oh-my-zsh/completions/_kubectx.zsh
 ln -s /opt/kubectx/completion/kubens.zsh ~/.oh-my-zsh/completions/_kubens.zsh
+
+font
+[Fira code](https://github.com/tonsky/FiraCode/wiki/Linux-instructions)
