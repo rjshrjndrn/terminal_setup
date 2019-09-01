@@ -212,6 +212,9 @@ alias kd='kubectl describe'
 alias ke='kubectl edit'
 alias kl='kubectl logs'
 alias kex='kubectl exec'
+
+# Window manager
+alias a='wmctrl -a'
 # Exporting vars
 #export GOROOT=~/go
 export GOPATH=~/go_code
@@ -283,3 +286,7 @@ ftpane() {
     tmux select-window -t $target_window
   fi
 }
+
+# Spaceship config
+SPACESHIP_PROMPT_ADD_NEWLINE=false
+

@@ -72,3 +72,12 @@ font
 
 Shell:
 [SpaceShip](https://denysdovhan.com/spaceship-prompt/#oh-my-zsh)
+
+> terminal.sexy is a great site for custom themes
+
+> alternatives to alt+tab
+    - create keyboard shortcut 
+      ```
+      /bin/bash -c 'wmctrl -a <app> || <app>
+      ```
+      This will switch to that app, if exists; else create one
