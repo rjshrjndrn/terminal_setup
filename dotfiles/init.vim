@@ -29,8 +29,8 @@ Plug 'ncm2/ncm2-jedi'
 " Plug 'ncm2/ncm2-go'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
-Plug 'w0rp/ale'
 let b:ale_completion_enabled = 1
+Plug 'dense-analysis/ale'
 let b:ale_fixers = {
 \   'ansible': [
 \       'prettier',
@@ -444,10 +444,13 @@ augroup filetype_yml
 augroup END
 
 " start terminal in insert mode
-if has('nvim')
-    autocmd TermOpen term://* startinsert
-endif
-"
+" Issue with new async terminal 
+" ends up current buffer in inesert mode.
+" if has('nvim')
+"     autocmd!
+"     autocmd TermOpen term://* startinsert
+" endif
+
 "}}}
 
 
