@@ -61,6 +61,9 @@ ssh <ctrl-k>
 ssh rajesh@10.0.3.2 # some server
 ```
 
+## Plugins
+1. [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy) for rich git diff
+
 
 ## Autocompletions
 kube
