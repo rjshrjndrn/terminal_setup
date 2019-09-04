@@ -405,8 +405,6 @@ map gc<Space> <Plug>VimwikiToggleListItem
 " Intent
 let g:indent_guides_enable_on_vim_startup = 1
 
-"custom file based remapings
-au FileType go nmap <leader>r :!go run %<Enter>
 
 set background=dark
 let g:gruvbox_contrast_dark = 'medium'
@@ -432,6 +430,9 @@ augroup filetypes
     autocmd BufEnter ".*\.md$" set spell tabstop=2 expandtab shiftwidth=2 ft=markdown
     autocmd BufEnter Jenkinsfile setlocal ft=groovy
     autocmd FileType vimwiki let b:auto_save=1
+    "custom file based remapings
+    au FileType go nmap <leader>gr <Plug>(go-run)
+    au FileType go nmap <leader>gt <Plug>(go-test)
 augroup END
 
 
