@@ -77,6 +77,7 @@ font
 
 Shell:
 [starship](https://starship.rs)
+Issue with fonts: https://github.com/starship/starship/issues/319
 
 Git
 
