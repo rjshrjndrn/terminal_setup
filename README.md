@@ -63,6 +63,7 @@ ssh rajesh@10.0.3.2 # some server
 
 ## Plugins
 1. [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy) for rich git diff
+2. [forgit](https://github.com/wfxr/forgit)
 
 
 ## Autocompletions
@@ -78,6 +79,24 @@ Shell:
 [SpaceShip](https://denysdovhan.com/spaceship-prompt/#oh-my-zsh)
 [starship](https://starship.rs)
 
+Git
+
+awesome git config
+```
+ git config --global color.ui true
+
+git config --global color.diff-highlight.oldNormal    "red bold"
+git config --global color.diff-highlight.oldHighlight "red bold 52"
+git config --global color.diff-highlight.newNormal    "green bold"
+git config --global color.diff-highlight.newHighlight "green bold 22"
+
+git config --global color.diff.meta       "11"
+git config --global color.diff.frag       "magenta bold"
+git config --global color.diff.commit     "yellow bold"
+git config --global color.diff.old        "red bold"
+git config --global color.diff.new        "green bold"
+git config --global color.diff.whitespace "red reverse"
+```
 
 
 > terminal.sexy is a great site for custom themes
