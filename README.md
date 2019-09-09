@@ -76,7 +76,6 @@ font
 [aur/nerd-fonts-complete](https://www.nerdfonts.com/)
 
 Shell:
-[SpaceShip](https://denysdovhan.com/spaceship-prompt/#oh-my-zsh)
 [starship](https://starship.rs)
 
 Git
