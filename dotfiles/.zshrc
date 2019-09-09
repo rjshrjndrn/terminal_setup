@@ -13,7 +13,7 @@ setopt appendhistory
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="simple"
+ZSH_THEME="spaceship"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -80,6 +80,7 @@ plugins=(
     history-substring-search
     z
     zsh-autosuggestions
+    forgit
     )
 
 source $ZSH/oh-my-zsh.sh
@@ -212,6 +213,7 @@ alias kd='kubectl describe'
 alias ke='kubectl edit'
 alias kl='kubectl logs'
 alias kex='kubectl exec'
+alias kx='kubectx'
 
 # Window manager
 alias a='wmctrl -a'
@@ -287,6 +289,5 @@ ftpane() {
   fi
 }
 
-# Spaceship config
-SPACESHIP_PROMPT_ADD_NEWLINE=false
-
+# Starship config
+# eval "$(starship init zsh)"
