@@ -104,6 +104,6 @@ git config --global color.diff.whitespace "red reverse"
 > alternatives to alt+tab
     - create keyboard shortcut 
       ```
-      /bin/bash -c 'wmctrl -a <app> || <app>
+      /bin/bash -c "wmctrl -a <app> || <app>"
       ```
       This will switch to that app, if exists; else create one
