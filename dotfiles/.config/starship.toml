@@ -6,11 +6,11 @@ add_newline = false
 symbol = "➜"     # The "symbol" segment is being set to "➜"
 
 # Disable the package module, hiding it from the prompt completely
-[package]
-disabled = true
+# [package]
+# disabled = true
 
 [git_branch]
-symbol = "🌱 "
+symbol = " "
 truncation_length = "4"
 truncation_symbol = ""
 
@@ -22,6 +22,12 @@ discharging_symbol = "💀"
 [git_state]
 progress_divider = " of "
 cherry_pick = "🍒 PICKING"
+
+[git_status]
+stashed = "ﴖ "
+modified = " "
+staged = " "
+ahead = "龍"
 
 [rust]
 symbol = " "
