@@ -210,10 +210,13 @@ alias k='kubectl'
 alias kg='kubectl get'
 alias ka='kubectl apply -f'
 alias kd='kubectl describe'
+alias kdl='kubectl delete'
 alias ke='kubectl edit'
 alias kl='kubectl logs'
 alias kex='kubectl exec'
 alias kx='kubectx'
+alias kn='kubens'
+alias knc='kubens -c'
 
 # Window manager
 alias a='wmctrl -a'
@@ -289,5 +292,7 @@ ftpane() {
   fi
 }
 
+export PATH=$PATH:~/.kube/plugins/jordanwilson230
 # Starship config
 eval "$(starship init zsh)"
+
