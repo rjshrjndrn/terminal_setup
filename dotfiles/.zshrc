@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/rajeshr/.oh-my-zsh"
+export ZSH="${HOME}/.oh-my-zsh"
 
 HISTFILE=~/.histfile
 HISTSIZE=10000
@@ -208,6 +208,7 @@ alias yay="yay --sudoloop"
 alias d='docker'
 alias k='kubectl'
 alias kg='kubectl get'
+alias kga='kubectl get all'
 alias ka='kubectl apply -f'
 alias kd='kubectl describe'
 alias kdl='kubectl delete'
@@ -217,6 +218,7 @@ alias kex='kubectl exec'
 alias kx='kubectx'
 alias kn='kubens'
 alias knc='kubens -c'
+alias kc='kubectl create'
 
 # Window manager
 alias a='wmctrl -a'
