@@ -109,3 +109,6 @@ git config --global color.diff.whitespace "red reverse"
       /bin/bash -c "wmctrl -a <app> || <app>"
       ```
       This will switch to that app, if exists; else create one
+      
+## Tmux
+
