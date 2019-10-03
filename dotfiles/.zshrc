@@ -123,8 +123,8 @@ sk
 function pr() {
 
     branch=${1:-$(git rev-parse --abbrev-ref HEAD | cut -d ':' -f2 | cut -d '/' -f2)}
-    upstream=${2:-$(git remote get-url origin | cut -d ':' -f2 | cut -d '/' -f1)}
-    echo $branch $upstream
+    upstream=${2:-$(basename `git remote get-url origin` | cut -d '.' -f1)}
+    echo hub pull-request -b $upstream:$branch -h $(git rev-parse --abbrev-ref HEAD | cut -d ':' -f2 | cut -d '/' -f2) -f
     hub pull-request -b $upstream:$branch -h $(git rev-parse --abbrev-ref HEAD | cut -d ':' -f2 | cut -d '/' -f2) -f
 }
 alias m='mkdir'
@@ -209,6 +209,7 @@ alias d='docker'
 alias k='kubectl'
 alias kg='kubectl get'
 alias kga='kubectl get all'
+alias kgaa='kubectl get all --all-namespaces'
 alias ka='kubectl apply -f'
 alias kd='kubectl describe'
 alias kdl='kubectl delete'
