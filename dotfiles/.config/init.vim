@@ -94,6 +94,9 @@ let g:ansible_name_highlight = 'd'
 let g:ansible_extra_keywords_highlight = 1
 let g:ansible_normal_keywords_highlight = 'Constant'
 
+Plug 'mustache/vim-mustache-handlebars'
+let g:mustache_abbreviations = 1
+
 " Iconpack for vim
 Plug 'ryanoasis/vim-devicons'
 
@@ -403,6 +406,7 @@ let g:vimwiki_list = [wiki_work, wiki_personal]
 let g:vimwiki_ext2syntax = {'.md': 'markdown',
                   \ '.mkd': 'markdown',
                   \ '.wiki': 'media'}
+let g:vimwiki_folding='custom'
 map gc<Space> <Plug>VimwikiToggleListItem
 
 " Intent
@@ -430,7 +434,7 @@ augroup filetypes
     autocmd Filetype yaml setlocal shiftwidth=2 tabstop=2 expandtab
     autocmd Filetype gitcommit setlocal spell
     autocmd Filetype git setlocal nofoldenable
-    autocmd BufEnter ".*\.md$" set spell tabstop=2 expandtab shiftwidth=2 ft=markdown
+    autocmd BufEnter ".*\.md$" setlocal spell tabstop=2 expandtab shiftwidth=2 foldmethod=marker
     autocmd BufEnter Jenkinsfile setlocal ft=groovy
     autocmd FileType vimwiki let b:auto_save=1
     "custom file based remapings
