@@ -73,9 +73,8 @@ ln -s /opt/kubectx/completion/kubens.zsh ~/.oh-my-zsh/completions/_kubens.zsh
 
 font
 [Fira code](https://github.com/tonsky/FiraCode/wiki/Linux-instructions)
-[aur/nerd-fonts-complete](https://www.nerdfonts.com/)
-[aur/ttf-twemoji-color](https://github.com/eosrei/twemoji-color-font#install-on-linux)
-extra/noto-fonts-cjk
+glyps: aur/noto-fonts-emoji
+ttf-indic-otf
 
 Shell:
 [starship](https://starship.rs)
