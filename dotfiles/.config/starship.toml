@@ -23,11 +23,10 @@ discharging_symbol = "💀"
 progress_divider = " of "
 cherry_pick = "🍒 PICKING"
 
-[git_status]
-stashed = "ﴖ "
-modified = " "
-staged = " "
-ahead = "龍"
-
 [rust]
 symbol = " "
+
+[kubernetes]
+symbol = "⛵ "
+style = "dim green"
+disabled = false

@@ -124,8 +124,8 @@ function pr() {
 
     branch=${1:-$(git rev-parse --abbrev-ref HEAD | cut -d ':' -f2 | cut -d '/' -f2)}
     upstream=${2:-$(basename `git remote get-url origin` | cut -d '.' -f1)}
-    echo hub pull-request -b $upstream:$branch -h $(git rev-parse --abbrev-ref HEAD | cut -d ':' -f2 | cut -d '/' -f2) -f
-    hub pull-request -b $upstream:$branch -h $(git rev-parse --abbrev-ref HEAD | cut -d ':' -f2 | cut -d '/' -f2) -f
+    echo hub pull-request -b project-sunbird/$upstream:$branch -h $(git rev-parse --abbrev-ref HEAD | cut -d ':' -f2 | cut -d '/' -f2) -f
+    hub pull-request -b project-sunbird/$upstream:$branch -h $(git rev-parse --abbrev-ref HEAD | cut -d ':' -f2 | cut -d '/' -f2) -f
 }
 alias m='mkdir'
 alias clea='clear'
@@ -168,6 +168,8 @@ alias gpso='git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)'
 alias gpsr='git push --set-upstream rjshrjndrn $(git rev-parse --abbrev-ref HEAD)'
 alias grc='git rebase --continue'
 alias grs='git rebase --skip'
+alias gst='git stash'
+alias gstp='git stash pop'
 
 # hub alias
 # Sourcing hub for git
@@ -221,6 +223,8 @@ alias kn='kubens'
 alias knc='kubens -c'
 alias kc='kubectl create'
 
+alias h3='helm3'
+
 # Window manager
 alias a='wmctrl -a'
 # Exporting vars
@@ -249,6 +253,7 @@ if [ /home/rajeshr/apps/bin/kubectl ]; then source <(kubectl completion zsh); fi
 xinput disable 9
 source <(stern --completion=zsh)
 source <(helm completion zsh)
+source <(helm3 completion zsh)
 # [[ $(xmodmap -pk | grep Caps | awk '{ print $1 }') -ne 9 ]] && setxkbmap -option caps:escape
 
 ##### Tmux functions #####
