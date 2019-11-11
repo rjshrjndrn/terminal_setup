@@ -71,10 +71,13 @@ kube
 ln -s /opt/kubectx/completion/kubectx.zsh ~/.oh-my-zsh/completions/_kubectx.zsh
 ln -s /opt/kubectx/completion/kubens.zsh ~/.oh-my-zsh/completions/_kubens.zsh
 
-font
+## font
 [Fira code](https://github.com/tonsky/FiraCode/wiki/Linux-instructions)
 glyps: aur/noto-fonts-emoji
 ttf-indic-otf
+
+## Theme
+Arc: https://github.com/horst3180/arc-theme
 
 Shell:
 [starship](https://starship.rs)
