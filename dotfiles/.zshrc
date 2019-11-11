@@ -250,7 +250,7 @@ export PATH=$PATH:~/apps/bin:~/go_code/bin
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 if [ /home/rajeshr/apps/bin/kubectl ]; then source <(kubectl completion zsh); fi
-xinput disable 9
+# xinput disable 9
 source <(stern --completion=zsh)
 source <(helm completion zsh)
 source <(helm3 completion zsh)

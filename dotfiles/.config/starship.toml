@@ -1,32 +1,29 @@
-# Don't print a new line at the start of the prompt
 add_newline = false
-
-# Replace the "❯" symbol in the prompt with "➜"
-[character]      # The name of the module we are confguring is "character"
-symbol = "➜"     # The "symbol" segment is being set to "➜"
-
-# Disable the package module, hiding it from the prompt completely
-# [package]
-# disabled = true
-
-[git_branch]
-symbol = " "
-truncation_length = "4"
-truncation_symbol = ""
-
-[battery]
-full_symbol = "🔋"
-charging_symbol = "⚡️"
-discharging_symbol = "💀"
-
-[git_state]
-progress_divider = " of "
-cherry_pick = "🍒 PICKING"
-
-[rust]
-symbol = " "
 
 [kubernetes]
 symbol = "⛵ "
-style = "dim green"
+style = "dim yellow"
 disabled = false
+
+[aws]
+disabled = true
+
+[git_branch]
+symbol = "🌱 "
+truncation_length = 6
+truncation_symbol = ""
+
+[git_status]
+conflicted = "🏳"
+ahead = "🏎💨"
+behind = "😰"
+diverged = "😵"
+untracked = "🤷"
+stashed = "📦"
+modified = "📝"
+staged.value = "++"
+staged.style = "green"
+staged_count.enabled = true
+staged_count.style = "green"
+renamed = "👅"
+deleted = "🗑"
