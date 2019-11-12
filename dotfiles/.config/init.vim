@@ -31,7 +31,7 @@ nnoremap gpl :Gpull --rebase
 " will take branch name as #Issue-number
 let @w='5G$vByggIIssue #000 feat: pggA'
 let @e='ggIIssue #000 feat: '
-let @r='ggIIssue #000 chore: '
+let @r='ggIIssue #000 fix: '
 "}}}
 
 Plug 'tpope/vim-rhubarb'
