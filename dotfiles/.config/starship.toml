@@ -10,8 +10,6 @@ disabled = true
 
 [git_branch]
 symbol = "🌱 "
-truncation_length = 6
-truncation_symbol = ""
 
 [git_status]
 conflicted = "🏳"

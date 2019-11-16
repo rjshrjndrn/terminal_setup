@@ -1,4 +1,4 @@
-set encoding=utf-8 foldmethod=marker
+set encoding=utf-8
 let mapleader = ','
 set bs=eol,start,indent
 set ic is scs sw=4 ts=4 et termguicolors hidden nu splitbelow splitright mouse=a diffopt+=vertical laststatus=0
