@@ -34,6 +34,8 @@ let @e='ggIIssue #000 feat: '
 let @r='ggIIssue #000 fix: '
 "}}}
 
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-rhubarb'
 Plug 'scrooloose/nerdcommenter'
 "{{{
