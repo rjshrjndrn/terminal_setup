@@ -191,7 +191,7 @@ alias ssh='ssh -A'
 alias nssh='ssh -o "UserKnownHostsFile /dev/null" -o "StrictHostKeyChecking false"'
 alias nscp='scp -o "UserKnownHostsFile /dev/null" -o "StrictHostKeyChecking false"'
 jt(){
-    nvim $(find $1 -type f | fzy)
+    nvim $1**
 }
 nsr(){
     nssh rajeshr@$1
