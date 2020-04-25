@@ -65,6 +65,8 @@ ssh rajesh@10.0.3.2 # some server
 1. [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy) for rich git diff
 2. [forgit](https://github.com/wfxr/forgit)
 
+## Packages
+1. git-extras
 
 ## Autocompletions
 kube
